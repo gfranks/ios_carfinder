@@ -83,6 +83,7 @@
 - (void)loadSubviews {
     [_mapContainerView setBackgroundColor:[UIColor colorWithRed:(225/255.f) green:(225/255.f) blue:(225/255.f) alpha:1.0f]];
     _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-125)];
+    [_mapView setShowsUserLocation:YES];
     _mapView.delegate = self;
     _mapView.layer.masksToBounds = NO;
     _mapView.layer.shadowOffset = CGSizeMake(0, 1);
@@ -163,9 +164,20 @@
     [annotationAlert show];
 }
 
+- (void)addPointAtUserLocation {
+    carFinderAnnotationView = [[CarFinderAnnotationView alloc] initWithCoordinate:_mapView.userLocation.coordinate];
+    
+    UIAlertView *annotationAlert = [[UIAlertView alloc] initWithTitle:@"Track Car Location"
+                                                              message:@"Would you like to add a car location pin here?"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"NO"
+                                                    otherButtonTitles:@"YES", nil];
+    annotationAlert.tag = Add_Pin_Alert_Tag;
+    [annotationAlert show];
+}
+
 - (void)clearMapPoints {
     carFinderAnnotationView = nil;
-    [_mapView setShowsUserLocation:NO];
     [_mapView removeAnnotations:_mapView.annotations];
 }
 
@@ -216,10 +228,8 @@
         if (buttonIndex == 1) {
             [_mapView removeAnnotations:_mapView.annotations];
             [_mapView addAnnotation:carFinderAnnotationView];
-            [_mapView setShowsUserLocation:YES];
         } else {
             carFinderAnnotationView = nil;
-            [_mapView setShowsUserLocation:NO];
         }
     } else if (alertView.tag == Get_Dir_Alert_Tag) {
         if (buttonIndex == 1) {
@@ -234,8 +244,10 @@
 #pragma mark - MKMapViewDelegate methods
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapview viewForAnnotation:(id <MKAnnotation>)annotation {
-    if ([annotation isKindOfClass:[MKUserLocation class]])
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
         return nil;
+    }
+    
     static NSString* AnnotationIdentifier = @"AnnotationIdentifier";
     MKAnnotationView *annotationView = [mapview dequeueReusableAnnotationViewWithIdentifier:AnnotationIdentifier];
     if(annotationView)
@@ -254,10 +266,18 @@
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)annotationViews {
     for (MKAnnotationView *annView in annotationViews) {
-        CGRect endFrame = annView.frame;
-        annView.frame = CGRectOffset(endFrame, 0, -500);
-        [UIView animateWithDuration:0.5
-                         animations:^{ annView.frame = endFrame; }];
+        if (annView.annotation == mapView.userLocation) {
+            annView.canShowCallout = YES;
+            UIButton *addCarLocationButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            [addCarLocationButton addTarget:self action:@selector(addPointAtUserLocation) forControlEvents:UIControlEventTouchUpInside];
+            annView.rightCalloutAccessoryView = addCarLocationButton;
+            break;
+        } else {
+            CGRect endFrame = annView.frame;
+            annView.frame = CGRectOffset(endFrame, 0, -500);
+            [UIView animateWithDuration:0.5
+                             animations:^{ annView.frame = endFrame; }];
+        }
     }
 }
 
