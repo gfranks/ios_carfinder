@@ -250,10 +250,8 @@
     return nil;
 }
 
-- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)annotationViews
-{
-    for (MKAnnotationView *annView in annotationViews)
-    {
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)annotationViews {
+    for (MKAnnotationView *annView in annotationViews) {
         CGRect endFrame = annView.frame;
         annView.frame = CGRectOffset(endFrame, 0, -500);
         [UIView animateWithDuration:0.5
@@ -262,6 +260,10 @@
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    if ([view.annotation isKindOfClass:[MKUserLocation class]]) {
+        return;
+    }
+    
     [self askForDirections];
     
     [mapView deselectAnnotation:view.annotation animated:NO];
