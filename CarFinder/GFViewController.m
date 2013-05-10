@@ -83,7 +83,6 @@
 - (void)loadSubviews {
     [_mapContainerView setBackgroundColor:[UIColor colorWithRed:(225/255.f) green:(225/255.f) blue:(225/255.f) alpha:1.0f]];
     _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-125)];
-    [_mapView setShowsUserLocation:YES];
     _mapView.delegate = self;
     _mapView.layer.masksToBounds = NO;
     _mapView.layer.shadowOffset = CGSizeMake(0, 1);
@@ -166,6 +165,7 @@
 
 - (void)clearMapPoints {
     carFinderAnnotationView = nil;
+    [_mapView setShowsUserLocation:NO];
     [_mapView removeAnnotations:_mapView.annotations];
 }
 
@@ -216,8 +216,10 @@
         if (buttonIndex == 1) {
             [_mapView removeAnnotations:_mapView.annotations];
             [_mapView addAnnotation:carFinderAnnotationView];
+            [_mapView setShowsUserLocation:YES];
         } else {
             carFinderAnnotationView = nil;
+            [_mapView setShowsUserLocation:NO];
         }
     } else if (alertView.tag == Get_Dir_Alert_Tag) {
         if (buttonIndex == 1) {
