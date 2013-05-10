@@ -12,7 +12,6 @@
 
 @interface GFViewController : UIViewController <UIAlertViewDelegate, MKMapViewDelegate>
 
-@property (nonatomic, strong) IBOutlet UIView *mapContainerView;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UIButton *carDirectionsButton;
 

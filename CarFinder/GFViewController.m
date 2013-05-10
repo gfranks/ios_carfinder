@@ -17,7 +17,7 @@
     CarFinderAnnotationView *carFinderAnnotationView;
     UIImageView *splashView;
     UILabel *viewControllerTitle;
-    UIButton *clearMapButton, *getDirButton;
+    UIButton *clearMapButton, *getDirButton, *userLocationButton;
 }
 
 @end
@@ -27,8 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[LocationManager sharedInstance] startListeningForLocation];
-    [self loadTitle];
-    [self loadNavItems];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationReceived:) name:@"locationAcquired" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationError:) name:@"locationError" object:nil];
@@ -36,6 +34,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self loadTitle];
+    [self loadNavItems];
     [self loadIntroView];
     [self loadSubviews];
 }
@@ -81,7 +81,7 @@
 }
 
 - (void)loadSubviews {
-    [_mapContainerView setBackgroundColor:[UIColor colorWithRed:(225/255.f) green:(225/255.f) blue:(225/255.f) alpha:1.0f]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:(225/255.f) green:(225/255.f) blue:(225/255.f) alpha:1.0f]];
     _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-125)];
     [_mapView setShowsUserLocation:YES];
     _mapView.delegate = self;
@@ -95,6 +95,11 @@
     lpgr.minimumPressDuration = 2.0;
     [_mapView addGestureRecognizer:lpgr];
     [self.view insertSubview:_mapView belowSubview:splashView];
+    
+    userLocationButton = [[UIButton alloc] initWithFrame:CGRectMake(10, _mapView.frame.size.height-57, 46, 46)];
+    [userLocationButton setBackgroundImage:[UIImage imageNamed:@"button-my-location-centered"] forState:UIControlStateNormal];
+    [userLocationButton addTarget:self action:@selector(centerAtCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
+    [self.view insertSubview:userLocationButton belowSubview:splashView];
     
     clearMapButton = [[UIButton alloc] initWithFrame:CGRectMake(5, _mapView.frame.size.height + 5, ([UIScreen mainScreen].bounds.size.width/2)-8, 45)];
     [clearMapButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
@@ -202,7 +207,7 @@
 
 #pragma mark - Location methods
 
--(void) locationError:(NSNotification*)notification {
+- (void)locationError:(NSNotification*)notification {
     if ([[LocationManager sharedInstance] getLocationServicesStatus] == LocationServicesStatusDenied) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Error"
                                                         message:@"Please go to your settings and enable location services for this app."
@@ -213,12 +218,18 @@
     }
 }
 
--(void) locationReceived:(NSNotification*)notification {
+- (void)locationReceived:(NSNotification*)notification {
     if ([[notification object] isKindOfClass:[CLLocation class]]) {
         MKCoordinateSpan span = MKCoordinateSpanMake(0.04, 0.04);
         MKCoordinateRegion region = {[[notification object] coordinate], span};
         [_mapView setRegion:region animated:YES];
     }
+}
+
+- (void)centerAtCurrentLocation {
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.04, 0.04);
+    MKCoordinateRegion region = {_mapView.userLocation.coordinate, span};
+    [_mapView setRegion:region animated:YES];
 }
 
 #pragma mark - UIAlertViewDelegate methods
@@ -242,6 +253,12 @@
 }
 
 #pragma mark - MKMapViewDelegate methods
+
+- (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)aUserLocation {
+    if ([userLocationButton isSelected]) {
+        [self centerAtCurrentLocation];
+    }
+}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapview viewForAnnotation:(id <MKAnnotation>)annotation {
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
@@ -282,13 +299,12 @@
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    [mapView deselectAnnotation:view.annotation animated:NO];
     if ([view.annotation isKindOfClass:[MKUserLocation class]]) {
         return;
     }
     
     [self askForDirections];
-    
-    [mapView deselectAnnotation:view.annotation animated:NO];
 }
 
 #pragma mark - Cleanup methods
