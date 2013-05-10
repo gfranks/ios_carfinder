@@ -16,6 +16,8 @@
 @interface GFViewController() {
     CarFinderAnnotationView *carFinderAnnotationView;
     UIImageView *splashView;
+    UILabel *viewControllerTitle;
+    UIButton *clearMapButton, *getDirButton;
 }
 
 @end
@@ -39,16 +41,16 @@
 }
 
 - (void)loadTitle {
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
-    titleLabel.shadowColor = [UIColor whiteColor];
-    titleLabel.shadowOffset = CGSizeMake(0, 1);
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.textColor = [UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f];
-    self.navigationItem.titleView = titleLabel;
-    titleLabel.text = @"Car Finder";
-    [titleLabel sizeToFit];
+    viewControllerTitle = [[UILabel alloc] initWithFrame:CGRectZero];
+    viewControllerTitle.backgroundColor = [UIColor clearColor];
+    viewControllerTitle.font = [UIFont boldSystemFontOfSize:20.0];
+    viewControllerTitle.shadowColor = [UIColor whiteColor];
+    viewControllerTitle.shadowOffset = CGSizeMake(0, 1);
+    viewControllerTitle.textAlignment = NSTextAlignmentCenter;
+    viewControllerTitle.textColor = [UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f];
+    self.navigationItem.titleView = viewControllerTitle;
+    viewControllerTitle.text = @"Car Finder";
+    [viewControllerTitle sizeToFit];
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(225/255.f) green:(225/255.f) blue:(225/255.f) alpha:1.0f];
 }
 
@@ -94,7 +96,7 @@
     [_mapView addGestureRecognizer:lpgr];
     [self.view insertSubview:_mapView belowSubview:splashView];
     
-    UIButton *clearMapButton = [[UIButton alloc] initWithFrame:CGRectMake(5, _mapView.frame.size.height + 5, ([UIScreen mainScreen].bounds.size.width/2)-8, 45)];
+    clearMapButton = [[UIButton alloc] initWithFrame:CGRectMake(5, _mapView.frame.size.height + 5, ([UIScreen mainScreen].bounds.size.width/2)-8, 45)];
     [clearMapButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [clearMapButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [clearMapButton setTitleColor:[UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f] forState:UIControlStateNormal];
@@ -109,7 +111,7 @@
     [clearMapButton setTitle:@"Clear Markers" forState:UIControlStateNormal];
     [self.view insertSubview:clearMapButton belowSubview:splashView];
     
-    UIButton *getDirButton = [[UIButton alloc] initWithFrame:CGRectMake(clearMapButton.frame.size.width+10, _mapView.frame.size.height + 5, ([UIScreen mainScreen].bounds.size.width/2)-7, 45)];
+    getDirButton = [[UIButton alloc] initWithFrame:CGRectMake(clearMapButton.frame.size.width+10, _mapView.frame.size.height + 5, ([UIScreen mainScreen].bounds.size.width/2)-7, 45)];
     [getDirButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [getDirButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [getDirButton setTitleColor:[UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f] forState:UIControlStateNormal];
@@ -125,9 +127,7 @@
     [self.view insertSubview:getDirButton belowSubview:splashView];
 }
 
-- (void)dismissIntroView:(UITapGestureRecognizer*)recognizer {
-    [self dismissIntroView];
-}
+#pragma mark - Dismissal methods
 
 - (void)dismissIntroView {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
@@ -142,6 +142,8 @@
 - (void)dismissCarFinder {
     abort();
 }
+
+#pragma mark - Add&Remove mapview annotations
 
 - (void)addPointToMap:(UIGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer.state != UIGestureRecognizerStateBegan)
@@ -189,7 +191,7 @@
 #pragma mark - Location methods
 
 -(void) locationError:(NSNotification*)notification {
-    if ([[LocationManager sharedInstance] getLocationServicesStatus] == PRMLocationServicesStatusDenied) {
+    if ([[LocationManager sharedInstance] getLocationServicesStatus] == LocationServicesStatusDenied) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Error"
                                                         message:@"Please go to your settings and enable location services for this app."
                                                        delegate:nil
@@ -271,6 +273,8 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"locationAcquired" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"locationError" object:nil];
+    [_mapView removeFromSuperview];
+    _mapView = nil;
 }
 
 - (void)didReceiveMemoryWarning {
