@@ -310,12 +310,12 @@
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
-    [mapView deselectAnnotation:view.annotation animated:NO];
     if ([view.annotation isKindOfClass:[MKUserLocation class]]) {
         return;
     }
     
     [self askForDirections];
+    [mapView deselectAnnotation:view.annotation animated:NO];
 }
 
 #pragma mark - Cleanup methods
