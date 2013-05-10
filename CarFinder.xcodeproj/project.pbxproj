@@ -1,0 +1,483 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		68C75B0F173C8366007E2F61 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B0E173C8366007E2F61 /* UIKit.framework */; };
+		68C75B11173C8366007E2F61 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B10173C8366007E2F61 /* Foundation.framework */; };
+		68C75B13173C8366007E2F61 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B12173C8366007E2F61 /* CoreGraphics.framework */; };
+		68C75B19173C8366007E2F61 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B17173C8366007E2F61 /* InfoPlist.strings */; };
+		68C75B1B173C8366007E2F61 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C75B1A173C8366007E2F61 /* main.m */; };
+		68C75B1F173C8366007E2F61 /* GFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C75B1E173C8366007E2F61 /* GFAppDelegate.m */; };
+		68C75B21173C8366007E2F61 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B20173C8366007E2F61 /* Default.png */; };
+		68C75B23173C8366007E2F61 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B22173C8366007E2F61 /* Default@2x.png */; };
+		68C75B25173C8366007E2F61 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B24173C8366007E2F61 /* Default-568h@2x.png */; };
+		68C75B28173C8366007E2F61 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B26173C8366007E2F61 /* MainStoryboard_iPhone.storyboard */; };
+		68C75B2B173C8366007E2F61 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B29173C8366007E2F61 /* MainStoryboard_iPad.storyboard */; };
+		68C75B2E173C8366007E2F61 /* GFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C75B2D173C8366007E2F61 /* GFViewController.m */; };
+		68C75B36173C8367007E2F61 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B35173C8367007E2F61 /* SenTestingKit.framework */; };
+		68C75B37173C8367007E2F61 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B0E173C8366007E2F61 /* UIKit.framework */; };
+		68C75B38173C8367007E2F61 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B10173C8366007E2F61 /* Foundation.framework */; };
+		68C75B40173C8367007E2F61 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B3E173C8367007E2F61 /* InfoPlist.strings */; };
+		68C75B43173C8367007E2F61 /* CarFinderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C75B42173C8367007E2F61 /* CarFinderTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		68C75B39173C8367007E2F61 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68C75B03173C8366007E2F61 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68C75B0A173C8366007E2F61;
+			remoteInfo = CarFinder;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		68C75B0B173C8366007E2F61 /* CarFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		68C75B0E173C8366007E2F61 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		68C75B10173C8366007E2F61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		68C75B12173C8366007E2F61 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		68C75B16173C8366007E2F61 /* CarFinder-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CarFinder-Info.plist"; sourceTree = "<group>"; };
+		68C75B18173C8366007E2F61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		68C75B1A173C8366007E2F61 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		68C75B1C173C8366007E2F61 /* CarFinder-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CarFinder-Prefix.pch"; sourceTree = "<group>"; };
+		68C75B1D173C8366007E2F61 /* GFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFAppDelegate.h; sourceTree = "<group>"; };
+		68C75B1E173C8366007E2F61 /* GFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFAppDelegate.m; sourceTree = "<group>"; };
+		68C75B20173C8366007E2F61 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		68C75B22173C8366007E2F61 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		68C75B24173C8366007E2F61 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		68C75B27173C8366007E2F61 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		68C75B2A173C8366007E2F61 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		68C75B2C173C8366007E2F61 /* GFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFViewController.h; sourceTree = "<group>"; };
+		68C75B2D173C8366007E2F61 /* GFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFViewController.m; sourceTree = "<group>"; };
+		68C75B34173C8367007E2F61 /* CarFinderTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarFinderTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		68C75B35173C8367007E2F61 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		68C75B3D173C8367007E2F61 /* CarFinderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CarFinderTests-Info.plist"; sourceTree = "<group>"; };
+		68C75B3F173C8367007E2F61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		68C75B41173C8367007E2F61 /* CarFinderTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarFinderTests.h; sourceTree = "<group>"; };
+		68C75B42173C8367007E2F61 /* CarFinderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarFinderTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		68C75B08173C8366007E2F61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68C75B0F173C8366007E2F61 /* UIKit.framework in Frameworks */,
+				68C75B11173C8366007E2F61 /* Foundation.framework in Frameworks */,
+				68C75B13173C8366007E2F61 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68C75B30173C8367007E2F61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68C75B36173C8367007E2F61 /* SenTestingKit.framework in Frameworks */,
+				68C75B37173C8367007E2F61 /* UIKit.framework in Frameworks */,
+				68C75B38173C8367007E2F61 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		68C75B02173C8366007E2F61 = {
+			isa = PBXGroup;
+			children = (
+				68C75B14173C8366007E2F61 /* CarFinder */,
+				68C75B3B173C8367007E2F61 /* CarFinderTests */,
+				68C75B0D173C8366007E2F61 /* Frameworks */,
+				68C75B0C173C8366007E2F61 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		68C75B0C173C8366007E2F61 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				68C75B0B173C8366007E2F61 /* CarFinder.app */,
+				68C75B34173C8367007E2F61 /* CarFinderTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		68C75B0D173C8366007E2F61 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				68C75B0E173C8366007E2F61 /* UIKit.framework */,
+				68C75B10173C8366007E2F61 /* Foundation.framework */,
+				68C75B12173C8366007E2F61 /* CoreGraphics.framework */,
+				68C75B35173C8367007E2F61 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		68C75B14173C8366007E2F61 /* CarFinder */ = {
+			isa = PBXGroup;
+			children = (
+				68C75B1D173C8366007E2F61 /* GFAppDelegate.h */,
+				68C75B1E173C8366007E2F61 /* GFAppDelegate.m */,
+				68C75B26173C8366007E2F61 /* MainStoryboard_iPhone.storyboard */,
+				68C75B29173C8366007E2F61 /* MainStoryboard_iPad.storyboard */,
+				68C75B2C173C8366007E2F61 /* GFViewController.h */,
+				68C75B2D173C8366007E2F61 /* GFViewController.m */,
+				68C75B15173C8366007E2F61 /* Supporting Files */,
+			);
+			path = CarFinder;
+			sourceTree = "<group>";
+		};
+		68C75B15173C8366007E2F61 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				68C75B16173C8366007E2F61 /* CarFinder-Info.plist */,
+				68C75B17173C8366007E2F61 /* InfoPlist.strings */,
+				68C75B1A173C8366007E2F61 /* main.m */,
+				68C75B1C173C8366007E2F61 /* CarFinder-Prefix.pch */,
+				68C75B20173C8366007E2F61 /* Default.png */,
+				68C75B22173C8366007E2F61 /* Default@2x.png */,
+				68C75B24173C8366007E2F61 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		68C75B3B173C8367007E2F61 /* CarFinderTests */ = {
+			isa = PBXGroup;
+			children = (
+				68C75B41173C8367007E2F61 /* CarFinderTests.h */,
+				68C75B42173C8367007E2F61 /* CarFinderTests.m */,
+				68C75B3C173C8367007E2F61 /* Supporting Files */,
+			);
+			path = CarFinderTests;
+			sourceTree = "<group>";
+		};
+		68C75B3C173C8367007E2F61 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				68C75B3D173C8367007E2F61 /* CarFinderTests-Info.plist */,
+				68C75B3E173C8367007E2F61 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		68C75B0A173C8366007E2F61 /* CarFinder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68C75B46173C8367007E2F61 /* Build configuration list for PBXNativeTarget "CarFinder" */;
+			buildPhases = (
+				68C75B07173C8366007E2F61 /* Sources */,
+				68C75B08173C8366007E2F61 /* Frameworks */,
+				68C75B09173C8366007E2F61 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CarFinder;
+			productName = CarFinder;
+			productReference = 68C75B0B173C8366007E2F61 /* CarFinder.app */;
+			productType = "com.apple.product-type.application";
+		};
+		68C75B33173C8367007E2F61 /* CarFinderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68C75B49173C8367007E2F61 /* Build configuration list for PBXNativeTarget "CarFinderTests" */;
+			buildPhases = (
+				68C75B2F173C8367007E2F61 /* Sources */,
+				68C75B30173C8367007E2F61 /* Frameworks */,
+				68C75B31173C8367007E2F61 /* Resources */,
+				68C75B32173C8367007E2F61 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				68C75B3A173C8367007E2F61 /* PBXTargetDependency */,
+			);
+			name = CarFinderTests;
+			productName = CarFinderTests;
+			productReference = 68C75B34173C8367007E2F61 /* CarFinderTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		68C75B03173C8366007E2F61 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = GF;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Garrett Franks";
+			};
+			buildConfigurationList = 68C75B06173C8366007E2F61 /* Build configuration list for PBXProject "CarFinder" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 68C75B02173C8366007E2F61;
+			productRefGroup = 68C75B0C173C8366007E2F61 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				68C75B0A173C8366007E2F61 /* CarFinder */,
+				68C75B33173C8367007E2F61 /* CarFinderTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		68C75B09173C8366007E2F61 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68C75B19173C8366007E2F61 /* InfoPlist.strings in Resources */,
+				68C75B21173C8366007E2F61 /* Default.png in Resources */,
+				68C75B23173C8366007E2F61 /* Default@2x.png in Resources */,
+				68C75B25173C8366007E2F61 /* Default-568h@2x.png in Resources */,
+				68C75B28173C8366007E2F61 /* MainStoryboard_iPhone.storyboard in Resources */,
+				68C75B2B173C8366007E2F61 /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68C75B31173C8367007E2F61 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68C75B40173C8367007E2F61 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		68C75B32173C8367007E2F61 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		68C75B07173C8366007E2F61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68C75B1B173C8366007E2F61 /* main.m in Sources */,
+				68C75B1F173C8366007E2F61 /* GFAppDelegate.m in Sources */,
+				68C75B2E173C8366007E2F61 /* GFViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68C75B2F173C8367007E2F61 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68C75B43173C8367007E2F61 /* CarFinderTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		68C75B3A173C8367007E2F61 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 68C75B0A173C8366007E2F61 /* CarFinder */;
+			targetProxy = 68C75B39173C8367007E2F61 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		68C75B17173C8366007E2F61 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68C75B18173C8366007E2F61 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		68C75B26173C8366007E2F61 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68C75B27173C8366007E2F61 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		68C75B29173C8366007E2F61 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68C75B2A173C8366007E2F61 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		68C75B3E173C8367007E2F61 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				68C75B3F173C8367007E2F61 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		68C75B44173C8367007E2F61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		68C75B45173C8367007E2F61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		68C75B47173C8367007E2F61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CarFinder/CarFinder-Prefix.pch";
+				INFOPLIST_FILE = "CarFinder/CarFinder-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		68C75B48173C8367007E2F61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CarFinder/CarFinder-Prefix.pch";
+				INFOPLIST_FILE = "CarFinder/CarFinder-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		68C75B4A173C8367007E2F61 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CarFinder.app/CarFinder";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CarFinder/CarFinder-Prefix.pch";
+				INFOPLIST_FILE = "CarFinderTests/CarFinderTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		68C75B4B173C8367007E2F61 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CarFinder.app/CarFinder";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CarFinder/CarFinder-Prefix.pch";
+				INFOPLIST_FILE = "CarFinderTests/CarFinderTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		68C75B06173C8366007E2F61 /* Build configuration list for PBXProject "CarFinder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68C75B44173C8367007E2F61 /* Debug */,
+				68C75B45173C8367007E2F61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68C75B46173C8367007E2F61 /* Build configuration list for PBXNativeTarget "CarFinder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68C75B47173C8367007E2F61 /* Debug */,
+				68C75B48173C8367007E2F61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		68C75B49173C8367007E2F61 /* Build configuration list for PBXNativeTarget "CarFinderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68C75B4A173C8367007E2F61 /* Debug */,
+				68C75B4B173C8367007E2F61 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 68C75B03173C8366007E2F61 /* Project object */;
+}
