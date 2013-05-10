@@ -17,13 +17,25 @@
 		68C75B23173C8366007E2F61 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B22173C8366007E2F61 /* Default@2x.png */; };
 		68C75B25173C8366007E2F61 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B24173C8366007E2F61 /* Default-568h@2x.png */; };
 		68C75B28173C8366007E2F61 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B26173C8366007E2F61 /* MainStoryboard_iPhone.storyboard */; };
-		68C75B2B173C8366007E2F61 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B29173C8366007E2F61 /* MainStoryboard_iPad.storyboard */; };
 		68C75B2E173C8366007E2F61 /* GFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C75B2D173C8366007E2F61 /* GFViewController.m */; };
 		68C75B36173C8367007E2F61 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B35173C8367007E2F61 /* SenTestingKit.framework */; };
 		68C75B37173C8367007E2F61 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B0E173C8366007E2F61 /* UIKit.framework */; };
 		68C75B38173C8367007E2F61 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B10173C8366007E2F61 /* Foundation.framework */; };
 		68C75B40173C8367007E2F61 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B3E173C8367007E2F61 /* InfoPlist.strings */; };
 		68C75B43173C8367007E2F61 /* CarFinderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C75B42173C8367007E2F61 /* CarFinderTests.m */; };
+		68C75B4E173C8566007E2F61 /* CarFinderAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C75B4D173C8566007E2F61 /* CarFinderAnnotationView.m */; };
+		68C75B50173C8C8C007E2F61 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B4F173C8C8C007E2F61 /* MainStoryboard_iPad.storyboard */; };
+		68C75B52173C8CB9007E2F61 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B51173C8CB9007E2F61 /* MapKit.framework */; };
+		68C75B55173C8E69007E2F61 /* button-navbar-light-down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B53173C8E69007E2F61 /* button-navbar-light-down@2x.png */; };
+		68C75B56173C8E69007E2F61 /* button-navbar-light-up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B54173C8E69007E2F61 /* button-navbar-light-up@2x.png */; };
+		68C75B5B173C9D32007E2F61 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C75B5A173C9D32007E2F61 /* LocationManager.m */; };
+		68C75B5D173C9D75007E2F61 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B5C173C9D75007E2F61 /* CoreLocation.framework */; };
+		68C75B72173CB1F6007E2F61 /* splash_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B6F173CB1F6007E2F61 /* splash_image.png */; };
+		68C75B73173CB1F6007E2F61 /* splash_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B70173CB1F6007E2F61 /* splash_image@2x.png */; };
+		68C75B75173CB210007E2F61 /* CarFinder.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B74173CB210007E2F61 /* CarFinder.png */; };
+		68C75B77173CB215007E2F61 /* CarFinder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B76173CB215007E2F61 /* CarFinder@2x.png */; };
+		68C75B7A173CB6F7007E2F61 /* car_pin_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B78173CB6F7007E2F61 /* car_pin_image.png */; };
+		68C75B7B173CB6F7007E2F61 /* car_pin_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68C75B79173CB6F7007E2F61 /* car_pin_image@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +63,6 @@
 		68C75B22173C8366007E2F61 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		68C75B24173C8366007E2F61 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		68C75B27173C8366007E2F61 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		68C75B2A173C8366007E2F61 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		68C75B2C173C8366007E2F61 /* GFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GFViewController.h; sourceTree = "<group>"; };
 		68C75B2D173C8366007E2F61 /* GFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GFViewController.m; sourceTree = "<group>"; };
 		68C75B34173C8367007E2F61 /* CarFinderTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarFinderTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +71,21 @@
 		68C75B3F173C8367007E2F61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		68C75B41173C8367007E2F61 /* CarFinderTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarFinderTests.h; sourceTree = "<group>"; };
 		68C75B42173C8367007E2F61 /* CarFinderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarFinderTests.m; sourceTree = "<group>"; };
+		68C75B4C173C8566007E2F61 /* CarFinderAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarFinderAnnotationView.h; sourceTree = "<group>"; };
+		68C75B4D173C8566007E2F61 /* CarFinderAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarFinderAnnotationView.m; sourceTree = "<group>"; };
+		68C75B4F173C8C8C007E2F61 /* MainStoryboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		68C75B51173C8CB9007E2F61 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		68C75B53173C8E69007E2F61 /* button-navbar-light-down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-navbar-light-down@2x.png"; sourceTree = "<group>"; };
+		68C75B54173C8E69007E2F61 /* button-navbar-light-up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-navbar-light-up@2x.png"; sourceTree = "<group>"; };
+		68C75B59173C9D32007E2F61 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		68C75B5A173C9D32007E2F61 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		68C75B5C173C9D75007E2F61 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		68C75B6F173CB1F6007E2F61 /* splash_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_image.png; sourceTree = "<group>"; };
+		68C75B70173CB1F6007E2F61 /* splash_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splash_image@2x.png"; sourceTree = "<group>"; };
+		68C75B74173CB210007E2F61 /* CarFinder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CarFinder.png; sourceTree = SOURCE_ROOT; };
+		68C75B76173CB215007E2F61 /* CarFinder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CarFinder@2x.png"; sourceTree = SOURCE_ROOT; };
+		68C75B78173CB6F7007E2F61 /* car_pin_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car_pin_image.png; sourceTree = "<group>"; };
+		68C75B79173CB6F7007E2F61 /* car_pin_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "car_pin_image@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +93,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68C75B5D173C9D75007E2F61 /* CoreLocation.framework in Frameworks */,
+				68C75B52173C8CB9007E2F61 /* MapKit.framework in Frameworks */,
 				68C75B0F173C8366007E2F61 /* UIKit.framework in Frameworks */,
 				68C75B11173C8366007E2F61 /* Foundation.framework in Frameworks */,
 				68C75B13173C8366007E2F61 /* CoreGraphics.framework in Frameworks */,
@@ -108,6 +136,8 @@
 		68C75B0D173C8366007E2F61 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				68C75B51173C8CB9007E2F61 /* MapKit.framework */,
+				68C75B5C173C9D75007E2F61 /* CoreLocation.framework */,
 				68C75B0E173C8366007E2F61 /* UIKit.framework */,
 				68C75B10173C8366007E2F61 /* Foundation.framework */,
 				68C75B12173C8366007E2F61 /* CoreGraphics.framework */,
@@ -121,11 +151,15 @@
 			children = (
 				68C75B1D173C8366007E2F61 /* GFAppDelegate.h */,
 				68C75B1E173C8366007E2F61 /* GFAppDelegate.m */,
-				68C75B26173C8366007E2F61 /* MainStoryboard_iPhone.storyboard */,
-				68C75B29173C8366007E2F61 /* MainStoryboard_iPad.storyboard */,
 				68C75B2C173C8366007E2F61 /* GFViewController.h */,
 				68C75B2D173C8366007E2F61 /* GFViewController.m */,
+				68C75B59173C9D32007E2F61 /* LocationManager.h */,
+				68C75B5A173C9D32007E2F61 /* LocationManager.m */,
+				68C75B26173C8366007E2F61 /* MainStoryboard_iPhone.storyboard */,
+				68C75B4F173C8C8C007E2F61 /* MainStoryboard_iPad.storyboard */,
 				68C75B15173C8366007E2F61 /* Supporting Files */,
+				68C75B4C173C8566007E2F61 /* CarFinderAnnotationView.h */,
+				68C75B4D173C8566007E2F61 /* CarFinderAnnotationView.m */,
 			);
 			path = CarFinder;
 			sourceTree = "<group>";
@@ -133,6 +167,14 @@
 		68C75B15173C8366007E2F61 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				68C75B78173CB6F7007E2F61 /* car_pin_image.png */,
+				68C75B79173CB6F7007E2F61 /* car_pin_image@2x.png */,
+				68C75B76173CB215007E2F61 /* CarFinder@2x.png */,
+				68C75B74173CB210007E2F61 /* CarFinder.png */,
+				68C75B6F173CB1F6007E2F61 /* splash_image.png */,
+				68C75B70173CB1F6007E2F61 /* splash_image@2x.png */,
+				68C75B53173C8E69007E2F61 /* button-navbar-light-down@2x.png */,
+				68C75B54173C8E69007E2F61 /* button-navbar-light-up@2x.png */,
 				68C75B16173C8366007E2F61 /* CarFinder-Info.plist */,
 				68C75B17173C8366007E2F61 /* InfoPlist.strings */,
 				68C75B1A173C8366007E2F61 /* main.m */,
@@ -240,7 +282,15 @@
 				68C75B23173C8366007E2F61 /* Default@2x.png in Resources */,
 				68C75B25173C8366007E2F61 /* Default-568h@2x.png in Resources */,
 				68C75B28173C8366007E2F61 /* MainStoryboard_iPhone.storyboard in Resources */,
-				68C75B2B173C8366007E2F61 /* MainStoryboard_iPad.storyboard in Resources */,
+				68C75B50173C8C8C007E2F61 /* MainStoryboard_iPad.storyboard in Resources */,
+				68C75B55173C8E69007E2F61 /* button-navbar-light-down@2x.png in Resources */,
+				68C75B56173C8E69007E2F61 /* button-navbar-light-up@2x.png in Resources */,
+				68C75B72173CB1F6007E2F61 /* splash_image.png in Resources */,
+				68C75B73173CB1F6007E2F61 /* splash_image@2x.png in Resources */,
+				68C75B75173CB210007E2F61 /* CarFinder.png in Resources */,
+				68C75B77173CB215007E2F61 /* CarFinder@2x.png in Resources */,
+				68C75B7A173CB6F7007E2F61 /* car_pin_image.png in Resources */,
+				68C75B7B173CB6F7007E2F61 /* car_pin_image@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +328,8 @@
 				68C75B1B173C8366007E2F61 /* main.m in Sources */,
 				68C75B1F173C8366007E2F61 /* GFAppDelegate.m in Sources */,
 				68C75B2E173C8366007E2F61 /* GFViewController.m in Sources */,
+				68C75B4E173C8566007E2F61 /* CarFinderAnnotationView.m in Sources */,
+				68C75B5B173C9D32007E2F61 /* LocationManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,14 +366,6 @@
 				68C75B27173C8366007E2F61 /* en */,
 			);
 			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		68C75B29173C8366007E2F61 /* MainStoryboard_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				68C75B2A173C8366007E2F61 /* en */,
-			);
-			name = MainStoryboard_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		68C75B3E173C8367007E2F61 /* InfoPlist.strings */ = {
@@ -400,6 +444,7 @@
 				GCC_PREFIX_HEADER = "CarFinder/CarFinder-Prefix.pch";
 				INFOPLIST_FILE = "CarFinder/CarFinder-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -411,6 +456,7 @@
 				GCC_PREFIX_HEADER = "CarFinder/CarFinder-Prefix.pch";
 				INFOPLIST_FILE = "CarFinder/CarFinder-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -468,6 +514,7 @@
 				68C75B48173C8367007E2F61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		68C75B49173C8367007E2F61 /* Build configuration list for PBXNativeTarget "CarFinderTests" */ = {
 			isa = XCConfigurationList;
@@ -476,6 +523,7 @@
 				68C75B4B173C8367007E2F61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import "CarFinderAnnotationView.h"
 
-@interface GFViewController : UIViewController
+@interface GFViewController : UIViewController <UIAlertViewDelegate, MKMapViewDelegate>
+
+@property (nonatomic, strong) IBOutlet UIView *mapContainerView;
+@property (nonatomic, strong) MKMapView *mapView;
+@property (nonatomic, strong) UIButton *carDirectionsButton;
 
 @end

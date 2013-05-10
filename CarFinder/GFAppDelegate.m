@@ -7,12 +7,20 @@
 //
 
 #import "GFAppDelegate.h"
+#import "GFViewController.h"
 
 @implementation GFAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone"
+                                                         bundle:[NSBundle mainBundle]];
+    
+    GFViewController *myController = [storyboard instantiateViewControllerWithIdentifier:@"GFViewController"];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:myController];
+    self.window.rootViewController = navController;
     return YES;
 }
 							

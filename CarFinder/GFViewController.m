@@ -7,23 +7,274 @@
 //
 
 #import "GFViewController.h"
+#import <QuartzCore/QuartzCore.h>
+#import "LocationManager.h"
 
-@interface GFViewController ()
+#define Add_Pin_Alert_Tag 101
+#define Get_Dir_Alert_Tag 102
+
+@interface GFViewController() {
+    CarFinderAnnotationView *carFinderAnnotationView;
+    UIImageView *splashView;
+}
 
 @end
 
 @implementation GFViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    [[LocationManager sharedInstance] startListeningForLocation];
+    [self loadTitle];
+    [self loadNavItems];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationReceived:) name:@"locationAcquired" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationError:) name:@"locationError" object:nil];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadIntroView];
+    [self loadSubviews];
+}
+
+- (void)loadTitle {
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.font = [UIFont boldSystemFontOfSize:20.0];
+    titleLabel.shadowColor = [UIColor whiteColor];
+    titleLabel.shadowOffset = CGSizeMake(0, 1);
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.textColor = [UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f];
+    self.navigationItem.titleView = titleLabel;
+    titleLabel.text = @"Car Finder";
+    [titleLabel sizeToFit];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(225/255.f) green:(225/255.f) blue:(225/255.f) alpha:1.0f];
+}
+
+- (void)loadNavItems {
+    UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 52, 35)];
+    [closeButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    [closeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [closeButton setTitleColor:[UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f] forState:UIControlStateNormal];
+    [closeButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [closeButton.titleLabel setShadowColor:[UIColor whiteColor]];
+    [closeButton.titleLabel setShadowOffset:CGSizeMake(0, 1)];
+    [closeButton setBackgroundImage:[[UIImage imageNamed:@"button-navbar-light-up"] resizableImageWithCapInsets:UIEdgeInsetsMake(9, 9, 9, 9)] forState:UIControlStateNormal];
+    [closeButton setBackgroundImage:[[UIImage imageNamed:@"button-navbar-light-down"] resizableImageWithCapInsets:UIEdgeInsetsMake(9, 9, 9, 9)] forState:UIControlStateSelected];
+    [closeButton setBackgroundImage:[[UIImage imageNamed:@"button-navbar-light-down"] resizableImageWithCapInsets:UIEdgeInsetsMake(9, 9, 9, 9)] forState:UIControlStateHighlighted];
+    [closeButton addTarget:self action:@selector(dismissCarFinder) forControlEvents:UIControlEventTouchUpInside];
+    [closeButton setTitle:@"Close" forState:UIControlStateNormal];
+    closeButton.titleLabel.font = [UIFont boldSystemFontOfSize:12.0];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
+}
+
+- (void)loadIntroView {
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
+    splashView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"splash_image"]];
+    [self performSelector:@selector(dismissIntroView) withObject:nil afterDelay:4.0];
+    
+    [self.view addSubview:splashView];    
+}
+
+- (void)loadSubviews {
+    [_mapContainerView setBackgroundColor:[UIColor colorWithRed:(225/255.f) green:(225/255.f) blue:(225/255.f) alpha:1.0f]];
+    _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-125)];
+    [_mapView setShowsUserLocation:YES];
+    _mapView.delegate = self;
+    _mapView.layer.masksToBounds = NO;
+    _mapView.layer.shadowOffset = CGSizeMake(0, 1);
+    _mapView.layer.shadowRadius = 3;
+    _mapView.layer.shadowOpacity = 0.6;
+    _mapView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, _mapView.frame.size.width, _mapView.frame.size.height)].CGPath;
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                       action:@selector(addPointToMap:)];
+    lpgr.minimumPressDuration = 2.0;
+    [_mapView addGestureRecognizer:lpgr];
+    [self.view insertSubview:_mapView belowSubview:splashView];
+    
+    UIButton *clearMapButton = [[UIButton alloc] initWithFrame:CGRectMake(5, _mapView.frame.size.height + 5, ([UIScreen mainScreen].bounds.size.width/2)-8, 45)];
+    [clearMapButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    [clearMapButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+    [clearMapButton setTitleColor:[UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f] forState:UIControlStateNormal];
+    [clearMapButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [clearMapButton.titleLabel setFont:[UIFont boldSystemFontOfSize:15.0]];
+    [clearMapButton.titleLabel setShadowColor:[UIColor whiteColor]];
+    [clearMapButton.titleLabel setShadowOffset:CGSizeMake(0, 1)];
+    [clearMapButton setBackgroundImage:[[UIImage imageNamed:@"button-navbar-light-up"] resizableImageWithCapInsets:UIEdgeInsetsMake(9, 9, 9, 9)] forState:UIControlStateNormal];
+    [clearMapButton setBackgroundImage:[[UIImage imageNamed:@"button-navbar-light-down"] resizableImageWithCapInsets:UIEdgeInsetsMake(9, 9, 9, 9)] forState:UIControlStateSelected];
+    [clearMapButton setBackgroundImage:[[UIImage imageNamed:@"button-navbar-light-down"] resizableImageWithCapInsets:UIEdgeInsetsMake(9, 9, 9, 9)] forState:UIControlStateHighlighted];
+    [clearMapButton addTarget:self action:@selector(clearMapPoints) forControlEvents:UIControlEventTouchUpInside];
+    [clearMapButton setTitle:@"Clear Markers" forState:UIControlStateNormal];
+    [self.view insertSubview:clearMapButton belowSubview:splashView];
+    
+    UIButton *getDirButton = [[UIButton alloc] initWithFrame:CGRectMake(clearMapButton.frame.size.width+10, _mapView.frame.size.height + 5, ([UIScreen mainScreen].bounds.size.width/2)-7, 45)];
+    [getDirButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    [getDirButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+    [getDirButton setTitleColor:[UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f] forState:UIControlStateNormal];
+    [getDirButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [getDirButton.titleLabel setFont:[UIFont boldSystemFontOfSize:15.0]];
+    [getDirButton.titleLabel setShadowColor:[UIColor whiteColor]];
+    [getDirButton.titleLabel setShadowOffset:CGSizeMake(0, 1)];
+    [getDirButton setBackgroundImage:[[UIImage imageNamed:@"button-navbar-light-up"] resizableImageWithCapInsets:UIEdgeInsetsMake(9, 9, 9, 9)] forState:UIControlStateNormal];
+    [getDirButton setBackgroundImage:[[UIImage imageNamed:@"button-navbar-light-down"] resizableImageWithCapInsets:UIEdgeInsetsMake(9, 9, 9, 9)] forState:UIControlStateSelected];
+    [getDirButton setBackgroundImage:[[UIImage imageNamed:@"button-navbar-light-down"] resizableImageWithCapInsets:UIEdgeInsetsMake(9, 9, 9, 9)] forState:UIControlStateHighlighted];
+    [getDirButton addTarget:self action:@selector(askForDirections) forControlEvents:UIControlEventTouchUpInside];
+    [getDirButton setTitle:@"Directions" forState:UIControlStateNormal];
+    [self.view insertSubview:getDirButton belowSubview:splashView];
+}
+
+- (void)dismissIntroView:(UITapGestureRecognizer*)recognizer {
+    [self dismissIntroView];
+}
+
+- (void)dismissIntroView {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [UIView animateWithDuration:0.5 animations:^{
+        [splashView setAlpha:0.0];
+    } completion:^(BOOL finished) {
+        [splashView removeFromSuperview];
+        splashView = nil;
+    }];
+}
+
+- (void)dismissCarFinder {
+    abort();
+}
+
+- (void)addPointToMap:(UIGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state != UIGestureRecognizerStateBegan)
+        return;
+    
+    CGPoint touchPoint = [gestureRecognizer locationInView:_mapView];
+    CLLocationCoordinate2D touchMapCoordinate =
+    [self.mapView convertPoint:touchPoint toCoordinateFromView:_mapView];
+    
+    carFinderAnnotationView = [[CarFinderAnnotationView alloc] initWithCoordinate:touchMapCoordinate];
+    
+    UIAlertView *annotationAlert = [[UIAlertView alloc] initWithTitle:@"Track Car Location"
+                                                              message:@"Would you like to add a car location pin here?"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"NO"
+                                                    otherButtonTitles:@"YES", nil];
+    annotationAlert.tag = Add_Pin_Alert_Tag;
+    [annotationAlert show];
+}
+
+- (void)clearMapPoints {
+    carFinderAnnotationView = nil;
+    [_mapView removeAnnotations:_mapView.annotations];
+}
+
+- (void)askForDirections {
+    if (carFinderAnnotationView != nil) {
+        UIAlertView *showDirAlert = [[UIAlertView alloc] initWithTitle:@"Directions"
+                                                               message:@"Would you like directions to your car's location?"
+                                                              delegate:self
+                                                     cancelButtonTitle:@"NO"
+                                                     otherButtonTitles:@"YES", nil];
+        showDirAlert.tag = Get_Dir_Alert_Tag;
+        [showDirAlert show];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Car Locaion"
+                                                        message:@"You have not placed your car's location on the map yet."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+#pragma mark - Location methods
+
+-(void) locationError:(NSNotification*)notification {
+    if ([[LocationManager sharedInstance] getLocationServicesStatus] == PRMLocationServicesStatusDenied) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Error"
+                                                        message:@"Please go to your settings and enable location services for this app."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+-(void) locationReceived:(NSNotification*)notification {
+    if ([[notification object] isKindOfClass:[CLLocation class]]) {
+        MKCoordinateSpan span = MKCoordinateSpanMake(0.04, 0.04);
+        MKCoordinateRegion region = {[[notification object] coordinate], span};
+        [_mapView setRegion:region animated:YES];
+    }
+}
+
+#pragma mark - UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == Add_Pin_Alert_Tag) {
+        if (buttonIndex == 1) {
+            [_mapView removeAnnotations:_mapView.annotations];
+            [_mapView addAnnotation:carFinderAnnotationView];
+        } else {
+            carFinderAnnotationView = nil;
+        }
+    } else if (alertView.tag == Get_Dir_Alert_Tag) {
+        if (buttonIndex == 1) {
+            MKPlacemark* placeMark = [[MKPlacemark alloc] initWithCoordinate:carFinderAnnotationView.coordinate addressDictionary:nil];
+            MKMapItem* destination = [[MKMapItem alloc] initWithPlacemark:placeMark];
+            destination.name = @"Your Car's Location";
+            [destination openInMapsWithLaunchOptions:@{MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeWalking}];
+        }
+    }
+}
+
+#pragma mark - MKMapViewDelegate methods
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapview viewForAnnotation:(id <MKAnnotation>)annotation {
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+        return nil;
+    static NSString* AnnotationIdentifier = @"AnnotationIdentifier";
+    MKAnnotationView *annotationView = [mapview dequeueReusableAnnotationViewWithIdentifier:AnnotationIdentifier];
+    if(annotationView)
+        return annotationView;
+    else
+    {
+        MKAnnotationView *annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation
+                                                                         reuseIdentifier:AnnotationIdentifier];
+        annotationView.canShowCallout = NO;
+        annotationView.image = [UIImage imageNamed:@"car_pin_image"];
+        annotationView.draggable = NO;
+        return annotationView;
+    }
+    return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)annotationViews
 {
+    for (MKAnnotationView *annView in annotationViews)
+    {
+        CGRect endFrame = annView.frame;
+        annView.frame = CGRectOffset(endFrame, 0, -500);
+        [UIView animateWithDuration:0.5
+                         animations:^{ annView.frame = endFrame; }];
+    }
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    [self askForDirections];
+    
+    [mapView deselectAnnotation:view.annotation animated:NO];
+}
+
+#pragma mark - Cleanup methods
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"locationAcquired" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"locationError" object:nil];
+}
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
