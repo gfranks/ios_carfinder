@@ -18,6 +18,8 @@
     UIImageView *splashView;
     UILabel *viewControllerTitle;
     UIButton *clearMapButton, *getDirButton, *userLocationButton;
+    UISegmentedControl *mapTypeControl;
+    UIView *mapControlsContainer;
 }
 
 @end
@@ -82,7 +84,16 @@
 
 - (void)loadSubviews {
     [self.view setBackgroundColor:[UIColor colorWithRed:(225/255.f) green:(225/255.f) blue:(225/255.f) alpha:1.0f]];
-    _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-125)];
+    
+    CGRect screenRect = [UIScreen mainScreen].bounds;
+    
+    mapControlsContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height-125)];
+    mapTypeControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Standard", @"Hybrid", @"Satellite", nil]];
+    mapTypeControl.frame = CGRectMake((screenRect.size.width/2)-140, mapControlsContainer.frame.size.height - 50, 280, 44);
+    [mapControlsContainer addSubview:mapTypeControl];
+    [self.view insertSubview:mapControlsContainer belowSubview:splashView];
+    
+    _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height-125)];
     [_mapView setShowsUserLocation:YES];
     _mapView.delegate = self;
     _mapView.layer.masksToBounds = NO;
@@ -101,7 +112,7 @@
     [userLocationButton addTarget:self action:@selector(centerAtCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
     [self.view insertSubview:userLocationButton belowSubview:splashView];
     
-    clearMapButton = [[UIButton alloc] initWithFrame:CGRectMake(5, _mapView.frame.size.height + 5, ([UIScreen mainScreen].bounds.size.width/2)-8, 45)];
+    clearMapButton = [[UIButton alloc] initWithFrame:CGRectMake(5, _mapView.frame.size.height + 5, (screenRect.size.width/2)-8, 45)];
     [clearMapButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [clearMapButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [clearMapButton setTitleColor:[UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f] forState:UIControlStateNormal];
@@ -116,7 +127,7 @@
     [clearMapButton setTitle:@"Clear Markers" forState:UIControlStateNormal];
     [self.view insertSubview:clearMapButton belowSubview:splashView];
     
-    getDirButton = [[UIButton alloc] initWithFrame:CGRectMake(clearMapButton.frame.size.width+10, _mapView.frame.size.height + 5, ([UIScreen mainScreen].bounds.size.width/2)-7, 45)];
+    getDirButton = [[UIButton alloc] initWithFrame:CGRectMake(clearMapButton.frame.size.width+10, _mapView.frame.size.height + 5, (screenRect.size.width/2)-7, 45)];
     [getDirButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [getDirButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [getDirButton setTitleColor:[UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f] forState:UIControlStateNormal];

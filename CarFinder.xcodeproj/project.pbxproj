@@ -90,6 +90,12 @@
 		68C75B79173CB6F7007E2F61 /* car_pin_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "car_pin_image@2x.png"; sourceTree = "<group>"; };
 		68C75B7C173D4E96007E2F61 /* button-my-location-centered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-my-location-centered.png"; sourceTree = "<group>"; };
 		68C75B7D173D4E96007E2F61 /* button-my-location-centered@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-my-location-centered@2x.png"; sourceTree = "<group>"; };
+		68C75B96173D550A007E2F61 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		68C75B98173D552C007E2F61 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		68C75B9A173D554E007E2F61 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		68C75B9C173D5556007E2F61 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		68C75B9E173D557E007E2F61 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		68C75BA0173D55AD007E2F61 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +146,12 @@
 		68C75B0D173C8366007E2F61 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				68C75B9E173D557E007E2F61 /* libicucore.dylib */,
+				68C75B9C173D5556007E2F61 /* SystemConfiguration.framework */,
+				68C75B9A173D554E007E2F61 /* MobileCoreServices.framework */,
+				68C75B98173D552C007E2F61 /* CFNetwork.framework */,
+				68C75B96173D550A007E2F61 /* OpenGLES.framework */,
+				68C75BA0173D55AD007E2F61 /* QuartzCore.framework */,
 				68C75B51173C8CB9007E2F61 /* MapKit.framework */,
 				68C75B5C173C9D75007E2F61 /* CoreLocation.framework */,
 				68C75B0E173C8366007E2F61 /* UIKit.framework */,
