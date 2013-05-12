@@ -18,8 +18,10 @@
     UIImageView *splashView;
     UILabel *viewControllerTitle;
     UIButton *clearMapButton, *getDirButton, *userLocationButton;
+    XBPageDragView *pageDragView;
+    
     UISegmentedControl *mapTypeControl;
-    UIView *mapControlsContainer;
+    UILabel *mapTypeLabel;
 }
 
 @end
@@ -40,6 +42,11 @@
     [self loadNavItems];
     [self loadIntroView];
     [self loadSubviews];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [pageDragView refreshPageCurlView];
 }
 
 - (void)loadTitle {
@@ -83,35 +90,68 @@
 }
 
 - (void)loadSubviews {
+    CGRect screenRect = [UIScreen mainScreen].bounds;
     [self.view setBackgroundColor:[UIColor colorWithRed:(225/255.f) green:(225/255.f) blue:(225/255.f) alpha:1.0f]];
     
-    CGRect screenRect = [UIScreen mainScreen].bounds;
-    
-    mapControlsContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height-125)];
-    mapTypeControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Standard", @"Hybrid", @"Satellite", nil]];
-    mapTypeControl.frame = CGRectMake((screenRect.size.width/2)-140, mapControlsContainer.frame.size.height - 50, 280, 44);
-    [mapControlsContainer addSubview:mapTypeControl];
-    [self.view insertSubview:mapControlsContainer belowSubview:splashView];
-    
-    _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height-125)];
-    [_mapView setShowsUserLocation:YES];
-    _mapView.delegate = self;
-    _mapView.layer.masksToBounds = NO;
-    _mapView.layer.shadowOffset = CGSizeMake(0, 1);
-    _mapView.layer.shadowRadius = 3;
-    _mapView.layer.shadowOpacity = 0.6;
-    _mapView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, _mapView.frame.size.width, _mapView.frame.size.height)].CGPath;
-    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self
-                                                                                       action:@selector(addPointToMap:)];
-    lpgr.minimumPressDuration = 2.0;
-    [_mapView addGestureRecognizer:lpgr];
-    [self.view insertSubview:_mapView belowSubview:splashView];
+    [self setupMap];
+    [self setupMapControls];
+    [self setupActionButtons];
     
     userLocationButton = [[UIButton alloc] initWithFrame:CGRectMake(10, _mapView.frame.size.height-57, 46, 46)];
     [userLocationButton setBackgroundImage:[UIImage imageNamed:@"button-my-location-centered"] forState:UIControlStateNormal];
     [userLocationButton addTarget:self action:@selector(centerAtCurrentLocation) forControlEvents:UIControlEventTouchUpInside];
     [self.view insertSubview:userLocationButton belowSubview:splashView];
     
+    UIImageView *layerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button-layers-entrypoint"]];
+    layerImageView.frame = CGRectMake(64 - layerImageView.frame.size.width, 64 - layerImageView.frame.size.height, layerImageView.frame.size.width, layerImageView.frame.size.height);
+    layerImageView.contentMode = UIViewContentModeRight;
+    pageDragView = [[XBPageDragView alloc] initWithFrame:CGRectMake(screenRect.size.width - 64, _mapView.frame.size.height-64, 64, 64)];
+    [pageDragView addSubview:layerImageView];
+    pageDragView.viewToCurl = _mapView;
+    pageDragView.delegate = self;
+    [self.view insertSubview:pageDragView belowSubview:splashView];
+}
+
+- (void)setupMap {
+    CGRect screenRect = [UIScreen mainScreen].bounds;
+    _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height-125)];
+    [_mapView setShowsUserLocation:YES];
+    _mapView.delegate = self;
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                       action:@selector(addPointToMap:)];
+    lpgr.minimumPressDuration = 2.0;
+    [_mapView addGestureRecognizer:lpgr];
+    [self.view insertSubview:_mapView belowSubview:splashView];
+    
+    _mapView.layer.masksToBounds = NO;
+    _mapView.layer.shadowOffset = CGSizeMake(0, 1);
+    _mapView.layer.shadowRadius = 3;
+    _mapView.layer.shadowOpacity = 0.6;
+    _mapView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, _mapView.frame.size.width, _mapView.frame.size.height)].CGPath;
+}
+
+- (void)setupMapControls {
+    CGRect screenRect = [UIScreen mainScreen].bounds;
+    mapTypeControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Standard", @"Hybrid", @"Satellite", nil]];
+    mapTypeControl.frame = CGRectMake(screenRect.size.width-290, screenRect.size.height - 175, 280, 44);
+    
+    [mapTypeControl addTarget:self action:@selector(mapTypeSwitch:) forControlEvents:UIControlEventValueChanged];
+    [mapTypeControl setSelectedSegmentIndex:[[NSUserDefaults standardUserDefaults] integerForKey:@"mapType"]];
+    [self mapTypeSwitch:mapTypeControl];
+    
+    [self.view insertSubview:mapTypeControl belowSubview:_mapView];
+    mapTypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, mapTypeControl.frame.origin.y - 30, mapTypeControl.frame.size.width, 21)];
+    [mapTypeLabel setBackgroundColor:[UIColor clearColor]];
+    [mapTypeLabel setText:@"Change Map Type"];
+    [mapTypeLabel setTextColor:[UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f]];
+    [mapTypeLabel setShadowColor:[UIColor whiteColor]];
+    [mapTypeLabel setShadowOffset:CGSizeMake(0, 1)];
+    [mapTypeLabel setFont:[UIFont boldSystemFontOfSize:20.0]];
+    [self.view insertSubview:mapTypeLabel belowSubview:_mapView];
+}
+
+- (void)setupActionButtons {
+    CGRect screenRect = [UIScreen mainScreen].bounds;
     clearMapButton = [[UIButton alloc] initWithFrame:CGRectMake(5, _mapView.frame.size.height + 5, (screenRect.size.width/2)-8, 45)];
     [clearMapButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [clearMapButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
@@ -241,6 +281,28 @@
     MKCoordinateSpan span = MKCoordinateSpanMake(0.04, 0.04);
     MKCoordinateRegion region = {_mapView.userLocation.coordinate, span};
     [_mapView setRegion:region animated:YES];
+}
+
+- (void)mapTypeSwitch:(id)sender {
+    if (mapTypeControl.selectedSegmentIndex == 0) {
+        _mapView.mapType = MKMapTypeStandard;
+    } else if (mapTypeControl.selectedSegmentIndex == 1) {
+        _mapView.mapType = MKMapTypeHybrid;
+    } else if (mapTypeControl.selectedSegmentIndex == 2) {
+        _mapView.mapType = MKMapTypeSatellite;
+    }
+    [[NSUserDefaults standardUserDefaults] setInteger:mapTypeControl.selectedSegmentIndex forKey:@"mapType"];
+    [pageDragView uncurlPageAnimated:YES completion:nil];
+}
+
+#pragma mark - XBPageDragViewDelegate methods
+
+- (void)pageDidCurl:(BOOL)pageCurled {
+    if (pageCurled) {
+        [userLocationButton setHidden:YES];
+    } else {
+        [userLocationButton setHidden:NO];
+    }
 }
 
 #pragma mark - UIAlertViewDelegate methods

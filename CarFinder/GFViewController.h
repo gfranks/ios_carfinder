@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "CarFinderAnnotationView.h"
+#import "XBPageDragView.h"
 
-@interface GFViewController : UIViewController <UIAlertViewDelegate, MKMapViewDelegate>
+@interface GFViewController : UIViewController <UIAlertViewDelegate, MKMapViewDelegate, XBPageDragViewDelegate>
 
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UIButton *carDirectionsButton;

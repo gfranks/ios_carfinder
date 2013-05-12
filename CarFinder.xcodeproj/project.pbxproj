@@ -7,6 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		687F7CD4173DDE1B00082BBF /* CGPointAdditions.c in Sources */ = {isa = PBXBuildFile; fileRef = 687F7CC6173DDE1A00082BBF /* CGPointAdditions.c */; };
+		687F7CD5173DDE1B00082BBF /* XBAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 687F7CC9173DDE1A00082BBF /* XBAnimation.m */; };
+		687F7CD6173DDE1B00082BBF /* XBAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 687F7CCB173DDE1B00082BBF /* XBAnimationManager.m */; };
+		687F7CD7173DDE1B00082BBF /* XBCurlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 687F7CCD173DDE1B00082BBF /* XBCurlView.m */; };
+		687F7CD8173DDE1B00082BBF /* XBPageCurlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 687F7CCF173DDE1B00082BBF /* XBPageCurlView.m */; };
+		687F7CD9173DDE1B00082BBF /* XBPageDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = 687F7CD1173DDE1B00082BBF /* XBPageDragView.m */; };
+		687F7CDA173DDE1B00082BBF /* XBSnappingPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 687F7CD3173DDE1B00082BBF /* XBSnappingPoint.m */; };
+		687F7CDD173DDEFA00082BBF /* button-layers-entrypoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 687F7CDB173DDEFA00082BBF /* button-layers-entrypoint.png */; };
+		687F7CDE173DDEFA00082BBF /* button-layers-entrypoint@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 687F7CDC173DDEFA00082BBF /* button-layers-entrypoint@2x.png */; };
+		687F7CDF173DDF2400082BBF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75BA0173D55AD007E2F61 /* QuartzCore.framework */; };
+		687F7CE0173DDF3100082BBF /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B96173D550A007E2F61 /* OpenGLES.framework */; };
+		687F7CFD173DE83500082BBF /* BackFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 687F7CF4173DE83500082BBF /* BackFragmentShader.glsl */; };
+		687F7CFE173DE83500082BBF /* BackPageGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 687F7CF5173DE83500082BBF /* BackPageGradient.png */; };
+		687F7CFF173DE83500082BBF /* BackVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 687F7CF6173DE83500082BBF /* BackVertexShader.glsl */; };
+		687F7D00173DE83500082BBF /* FrontFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 687F7CF7173DE83500082BBF /* FrontFragmentShader.glsl */; };
+		687F7D01173DE83500082BBF /* FrontVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 687F7CF8173DE83500082BBF /* FrontVertexShader.glsl */; };
+		687F7D02173DE83500082BBF /* NextPageFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 687F7CF9173DE83500082BBF /* NextPageFragmentShader.glsl */; };
+		687F7D03173DE83500082BBF /* NextPageNoTextureFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 687F7CFA173DE83500082BBF /* NextPageNoTextureFragmentShader.glsl */; };
+		687F7D04173DE83500082BBF /* NextPageNoTextureVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 687F7CFB173DE83500082BBF /* NextPageNoTextureVertexShader.glsl */; };
+		687F7D05173DE83500082BBF /* NextPageVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 687F7CFC173DE83500082BBF /* NextPageVertexShader.glsl */; };
 		68C75B0F173C8366007E2F61 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B0E173C8366007E2F61 /* UIKit.framework */; };
 		68C75B11173C8366007E2F61 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B10173C8366007E2F61 /* Foundation.framework */; };
 		68C75B13173C8366007E2F61 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B12173C8366007E2F61 /* CoreGraphics.framework */; };
@@ -51,6 +71,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		687F7CC6173DDE1A00082BBF /* CGPointAdditions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CGPointAdditions.c; sourceTree = "<group>"; };
+		687F7CC7173DDE1A00082BBF /* CGPointAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPointAdditions.h; sourceTree = "<group>"; };
+		687F7CC8173DDE1A00082BBF /* XBAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAnimation.h; sourceTree = "<group>"; };
+		687F7CC9173DDE1A00082BBF /* XBAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAnimation.m; sourceTree = "<group>"; };
+		687F7CCA173DDE1B00082BBF /* XBAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAnimationManager.h; sourceTree = "<group>"; };
+		687F7CCB173DDE1B00082BBF /* XBAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBAnimationManager.m; sourceTree = "<group>"; };
+		687F7CCC173DDE1B00082BBF /* XBCurlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBCurlView.h; sourceTree = "<group>"; };
+		687F7CCD173DDE1B00082BBF /* XBCurlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBCurlView.m; sourceTree = "<group>"; };
+		687F7CCE173DDE1B00082BBF /* XBPageCurlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBPageCurlView.h; sourceTree = "<group>"; };
+		687F7CCF173DDE1B00082BBF /* XBPageCurlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBPageCurlView.m; sourceTree = "<group>"; };
+		687F7CD0173DDE1B00082BBF /* XBPageDragView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBPageDragView.h; sourceTree = "<group>"; };
+		687F7CD1173DDE1B00082BBF /* XBPageDragView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBPageDragView.m; sourceTree = "<group>"; };
+		687F7CD2173DDE1B00082BBF /* XBSnappingPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBSnappingPoint.h; sourceTree = "<group>"; };
+		687F7CD3173DDE1B00082BBF /* XBSnappingPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBSnappingPoint.m; sourceTree = "<group>"; };
+		687F7CDB173DDEFA00082BBF /* button-layers-entrypoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-layers-entrypoint.png"; sourceTree = "<group>"; };
+		687F7CDC173DDEFA00082BBF /* button-layers-entrypoint@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-layers-entrypoint@2x.png"; sourceTree = "<group>"; };
+		687F7CF4173DE83500082BBF /* BackFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BackFragmentShader.glsl; sourceTree = "<group>"; };
+		687F7CF5173DE83500082BBF /* BackPageGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackPageGradient.png; sourceTree = "<group>"; };
+		687F7CF6173DE83500082BBF /* BackVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BackVertexShader.glsl; sourceTree = "<group>"; };
+		687F7CF7173DE83500082BBF /* FrontFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FrontFragmentShader.glsl; sourceTree = "<group>"; };
+		687F7CF8173DE83500082BBF /* FrontVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FrontVertexShader.glsl; sourceTree = "<group>"; };
+		687F7CF9173DE83500082BBF /* NextPageFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NextPageFragmentShader.glsl; sourceTree = "<group>"; };
+		687F7CFA173DE83500082BBF /* NextPageNoTextureFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NextPageNoTextureFragmentShader.glsl; sourceTree = "<group>"; };
+		687F7CFB173DE83500082BBF /* NextPageNoTextureVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NextPageNoTextureVertexShader.glsl; sourceTree = "<group>"; };
+		687F7CFC173DE83500082BBF /* NextPageVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NextPageVertexShader.glsl; sourceTree = "<group>"; };
 		68C75B0B173C8366007E2F61 /* CarFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68C75B0E173C8366007E2F61 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		68C75B10173C8366007E2F61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -103,6 +148,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				687F7CE0173DDF3100082BBF /* OpenGLES.framework in Frameworks */,
+				687F7CDF173DDF2400082BBF /* QuartzCore.framework in Frameworks */,
 				68C75B5D173C9D75007E2F61 /* CoreLocation.framework in Frameworks */,
 				68C75B52173C8CB9007E2F61 /* MapKit.framework in Frameworks */,
 				68C75B0F173C8366007E2F61 /* UIKit.framework in Frameworks */,
@@ -124,6 +171,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		687F7CC5173DDE0300082BBF /* XBPageCurl */ = {
+			isa = PBXGroup;
+			children = (
+				687F7CE1173DE81600082BBF /* Resources */,
+				687F7CC6173DDE1A00082BBF /* CGPointAdditions.c */,
+				687F7CC7173DDE1A00082BBF /* CGPointAdditions.h */,
+				687F7CC8173DDE1A00082BBF /* XBAnimation.h */,
+				687F7CC9173DDE1A00082BBF /* XBAnimation.m */,
+				687F7CCA173DDE1B00082BBF /* XBAnimationManager.h */,
+				687F7CCB173DDE1B00082BBF /* XBAnimationManager.m */,
+				687F7CCC173DDE1B00082BBF /* XBCurlView.h */,
+				687F7CCD173DDE1B00082BBF /* XBCurlView.m */,
+				687F7CCE173DDE1B00082BBF /* XBPageCurlView.h */,
+				687F7CCF173DDE1B00082BBF /* XBPageCurlView.m */,
+				687F7CD0173DDE1B00082BBF /* XBPageDragView.h */,
+				687F7CD1173DDE1B00082BBF /* XBPageDragView.m */,
+				687F7CD2173DDE1B00082BBF /* XBSnappingPoint.h */,
+				687F7CD3173DDE1B00082BBF /* XBSnappingPoint.m */,
+			);
+			name = XBPageCurl;
+			sourceTree = "<group>";
+		};
+		687F7CE1173DE81600082BBF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				687F7CF4173DE83500082BBF /* BackFragmentShader.glsl */,
+				687F7CF5173DE83500082BBF /* BackPageGradient.png */,
+				687F7CF6173DE83500082BBF /* BackVertexShader.glsl */,
+				687F7CF7173DE83500082BBF /* FrontFragmentShader.glsl */,
+				687F7CF8173DE83500082BBF /* FrontVertexShader.glsl */,
+				687F7CF9173DE83500082BBF /* NextPageFragmentShader.glsl */,
+				687F7CFA173DE83500082BBF /* NextPageNoTextureFragmentShader.glsl */,
+				687F7CFB173DE83500082BBF /* NextPageNoTextureVertexShader.glsl */,
+				687F7CFC173DE83500082BBF /* NextPageVertexShader.glsl */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		68C75B02173C8366007E2F61 = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +258,7 @@
 				68C75B5A173C9D32007E2F61 /* LocationManager.m */,
 				68C75B26173C8366007E2F61 /* MainStoryboard_iPhone.storyboard */,
 				68C75B4F173C8C8C007E2F61 /* MainStoryboard_iPad.storyboard */,
+				687F7CC5173DDE0300082BBF /* XBPageCurl */,
 				68C75B15173C8366007E2F61 /* Supporting Files */,
 				68C75B4C173C8566007E2F61 /* CarFinderAnnotationView.h */,
 				68C75B4D173C8566007E2F61 /* CarFinderAnnotationView.m */,
@@ -183,6 +269,8 @@
 		68C75B15173C8366007E2F61 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				687F7CDB173DDEFA00082BBF /* button-layers-entrypoint.png */,
+				687F7CDC173DDEFA00082BBF /* button-layers-entrypoint@2x.png */,
 				68C75B7C173D4E96007E2F61 /* button-my-location-centered.png */,
 				68C75B7D173D4E96007E2F61 /* button-my-location-centered@2x.png */,
 				68C75B78173CB6F7007E2F61 /* car_pin_image.png */,
@@ -311,6 +399,17 @@
 				68C75B7B173CB6F7007E2F61 /* car_pin_image@2x.png in Resources */,
 				68C75B7E173D4E96007E2F61 /* button-my-location-centered.png in Resources */,
 				68C75B7F173D4E96007E2F61 /* button-my-location-centered@2x.png in Resources */,
+				687F7CDD173DDEFA00082BBF /* button-layers-entrypoint.png in Resources */,
+				687F7CDE173DDEFA00082BBF /* button-layers-entrypoint@2x.png in Resources */,
+				687F7CFD173DE83500082BBF /* BackFragmentShader.glsl in Resources */,
+				687F7CFE173DE83500082BBF /* BackPageGradient.png in Resources */,
+				687F7CFF173DE83500082BBF /* BackVertexShader.glsl in Resources */,
+				687F7D00173DE83500082BBF /* FrontFragmentShader.glsl in Resources */,
+				687F7D01173DE83500082BBF /* FrontVertexShader.glsl in Resources */,
+				687F7D02173DE83500082BBF /* NextPageFragmentShader.glsl in Resources */,
+				687F7D03173DE83500082BBF /* NextPageNoTextureFragmentShader.glsl in Resources */,
+				687F7D04173DE83500082BBF /* NextPageNoTextureVertexShader.glsl in Resources */,
+				687F7D05173DE83500082BBF /* NextPageVertexShader.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +449,13 @@
 				68C75B2E173C8366007E2F61 /* GFViewController.m in Sources */,
 				68C75B4E173C8566007E2F61 /* CarFinderAnnotationView.m in Sources */,
 				68C75B5B173C9D32007E2F61 /* LocationManager.m in Sources */,
+				687F7CD4173DDE1B00082BBF /* CGPointAdditions.c in Sources */,
+				687F7CD5173DDE1B00082BBF /* XBAnimation.m in Sources */,
+				687F7CD6173DDE1B00082BBF /* XBAnimationManager.m in Sources */,
+				687F7CD7173DDE1B00082BBF /* XBCurlView.m in Sources */,
+				687F7CD8173DDE1B00082BBF /* XBPageCurlView.m in Sources */,
+				687F7CD9173DDE1B00082BBF /* XBPageDragView.m in Sources */,
+				687F7CDA173DDE1B00082BBF /* XBSnappingPoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
