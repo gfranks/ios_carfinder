@@ -216,6 +216,7 @@
 }
 
 - (void)clearMapPoints {
+    showingDirections = NO;
     carFinderAnnotationView = nil;
     [_mapView removeAnnotations:_mapView.annotations];
     [_mapView removeDirectionsOverlay];
