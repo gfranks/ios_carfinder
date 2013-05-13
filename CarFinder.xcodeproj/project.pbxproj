@@ -252,15 +252,32 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		687F7D2417413FE600082BBF /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				68C75B2C173C8366007E2F61 /* GFViewController.h */,
+				68C75B2D173C8366007E2F61 /* GFViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		687F7D251741400200082BBF /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				68C75B26173C8366007E2F61 /* MainStoryboard_iPhone.storyboard */,
+				68C75B4F173C8C8C007E2F61 /* MainStoryboard_iPad.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		68C75B02173C8366007E2F61 = {
 			isa = PBXGroup;
 			children = (
-				687F7D1C17413F5000082BBF /* MTDirectionsKit.framework */,
+				687F7D1E17413F5E00082BBF /* MTDirectionsKitDemo.xcodeproj */,
 				68C75B14173C8366007E2F61 /* CarFinder */,
 				68C75B3B173C8367007E2F61 /* CarFinderTests */,
 				68C75B0D173C8366007E2F61 /* Frameworks */,
 				68C75B0C173C8366007E2F61 /* Products */,
-				687F7D1E17413F5E00082BBF /* MTDirectionsKitDemo.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -276,6 +293,7 @@
 		68C75B0D173C8366007E2F61 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				687F7D1C17413F5000082BBF /* MTDirectionsKit.framework */,
 				687F7D0D1741305400082BBF /* libxml2.dylib */,
 				68C75B9E173D557E007E2F61 /* libicucore.dylib */,
 				68C75B9C173D5556007E2F61 /* SystemConfiguration.framework */,
@@ -296,16 +314,14 @@
 		68C75B14173C8366007E2F61 /* CarFinder */ = {
 			isa = PBXGroup;
 			children = (
-				68C75B1D173C8366007E2F61 /* GFAppDelegate.h */,
-				68C75B1E173C8366007E2F61 /* GFAppDelegate.m */,
-				68C75B2C173C8366007E2F61 /* GFViewController.h */,
-				68C75B2D173C8366007E2F61 /* GFViewController.m */,
-				68C75B26173C8366007E2F61 /* MainStoryboard_iPhone.storyboard */,
-				68C75B4F173C8C8C007E2F61 /* MainStoryboard_iPad.storyboard */,
+				687F7D2417413FE600082BBF /* ViewControllers */,
+				687F7D251741400200082BBF /* Storyboards */,
 				687F7D171741348200082BBF /* TwoLineTitleView */,
 				687F7D181741348E00082BBF /* LocationManager */,
 				687F7CC5173DDE0300082BBF /* XBPageCurl */,
 				68C75B15173C8366007E2F61 /* Supporting Files */,
+				68C75B1D173C8366007E2F61 /* GFAppDelegate.h */,
+				68C75B1E173C8366007E2F61 /* GFAppDelegate.m */,
 				68C75B4C173C8566007E2F61 /* CarFinderAnnotationView.h */,
 				68C75B4D173C8566007E2F61 /* CarFinderAnnotationView.m */,
 			);
