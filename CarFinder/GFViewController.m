@@ -39,7 +39,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self loadTitle];
-    [self loadNavItems];
     [self loadIntroView];
     [self loadSubviews];
 }
@@ -61,23 +60,6 @@
     viewControllerTitle.text = @"Car Finder";
     [viewControllerTitle sizeToFit];
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(225/255.f) green:(225/255.f) blue:(225/255.f) alpha:1.0f];
-}
-
-- (void)loadNavItems {
-    UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 52, 35)];
-    [closeButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    [closeButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [closeButton setTitleColor:[UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f] forState:UIControlStateNormal];
-    [closeButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [closeButton.titleLabel setShadowColor:[UIColor whiteColor]];
-    [closeButton.titleLabel setShadowOffset:CGSizeMake(0, 1)];
-    [closeButton setBackgroundImage:[[UIImage imageNamed:@"button-navbar-light-up"] resizableImageWithCapInsets:UIEdgeInsetsMake(9, 9, 9, 9)] forState:UIControlStateNormal];
-    [closeButton setBackgroundImage:[[UIImage imageNamed:@"button-navbar-light-down"] resizableImageWithCapInsets:UIEdgeInsetsMake(9, 9, 9, 9)] forState:UIControlStateSelected];
-    [closeButton setBackgroundImage:[[UIImage imageNamed:@"button-navbar-light-down"] resizableImageWithCapInsets:UIEdgeInsetsMake(9, 9, 9, 9)] forState:UIControlStateHighlighted];
-    [closeButton addTarget:self action:@selector(dismissCarFinder) forControlEvents:UIControlEventTouchUpInside];
-    [closeButton setTitle:@"Close" forState:UIControlStateNormal];
-    closeButton.titleLabel.font = [UIFont boldSystemFontOfSize:12.0];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeButton];
 }
 
 - (void)loadIntroView {
@@ -114,7 +96,7 @@
 
 - (void)setupMap {
     CGRect screenRect = [UIScreen mainScreen].bounds;
-    _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height-125)];
+    _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height-120)];
     [_mapView setShowsUserLocation:YES];
     _mapView.delegate = self;
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self
@@ -153,7 +135,6 @@
 - (void)setupActionButtons {
     CGRect screenRect = [UIScreen mainScreen].bounds;
     clearMapButton = [[UIButton alloc] initWithFrame:CGRectMake(5, _mapView.frame.size.height + 5, (screenRect.size.width/2)-8, 45)];
-    [clearMapButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [clearMapButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [clearMapButton setTitleColor:[UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f] forState:UIControlStateNormal];
     [clearMapButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -168,7 +149,6 @@
     [self.view insertSubview:clearMapButton belowSubview:splashView];
     
     getDirButton = [[UIButton alloc] initWithFrame:CGRectMake(clearMapButton.frame.size.width+10, _mapView.frame.size.height + 5, (screenRect.size.width/2)-7, 45)];
-    [getDirButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [getDirButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [getDirButton setTitleColor:[UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f] forState:UIControlStateNormal];
     [getDirButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
