@@ -18,12 +18,12 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone"
                                                          bundle:[NSBundle mainBundle]];
     
-    GFViewController *myController = [storyboard instantiateViewControllerWithIdentifier:@"GFViewController"];
+    GFViewController *myController = [storyboard instantiateInitialViewController];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:myController];
     self.window.rootViewController = navController;
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

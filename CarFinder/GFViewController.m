@@ -16,12 +16,15 @@
 @interface GFViewController() {
     CarFinderAnnotationView *carFinderAnnotationView;
     UIImageView *splashView;
-    UILabel *viewControllerTitle;
     UIButton *clearMapButton, *getDirButton, *userLocationButton;
     XBPageDragView *pageDragView;
     
     UISegmentedControl *mapTypeControl;
     UILabel *mapTypeLabel;
+    
+    BOOL showingDirections;
+    
+    NSNumberFormatter *formatter;
 }
 
 @end
@@ -34,6 +37,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationReceived:) name:@"locationAcquired" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationError:) name:@"locationError" object:nil];
+    formatter = [[NSNumberFormatter alloc] init];    
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [formatter setMaximumFractionDigits:2];
+    [formatter setRoundingMode: NSNumberFormatterRoundUp];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,16 +56,8 @@
 }
 
 - (void)loadTitle {
-    viewControllerTitle = [[UILabel alloc] initWithFrame:CGRectZero];
-    viewControllerTitle.backgroundColor = [UIColor clearColor];
-    viewControllerTitle.font = [UIFont boldSystemFontOfSize:20.0];
-    viewControllerTitle.shadowColor = [UIColor whiteColor];
-    viewControllerTitle.shadowOffset = CGSizeMake(0, 1);
-    viewControllerTitle.textAlignment = NSTextAlignmentCenter;
-    viewControllerTitle.textColor = [UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f];
-    self.navigationItem.titleView = viewControllerTitle;
-    viewControllerTitle.text = @"Car Finder";
-    [viewControllerTitle sizeToFit];
+    _twoLineTitleView = [[TwoLineTitleView alloc] initWithFrame:CGRectMake(5, 0, 310, 44) title:@"Car Finder" subTitle:@"Not tracking car's location"];
+    self.navigationItem.titleView = _twoLineTitleView;
     self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(225/255.f) green:(225/255.f) blue:(225/255.f) alpha:1.0f];
 }
 
@@ -96,7 +95,7 @@
 
 - (void)setupMap {
     CGRect screenRect = [UIScreen mainScreen].bounds;
-    _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height-120)];
+    _mapView = [[MTDMapView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, screenRect.size.height-120)];
     [_mapView setShowsUserLocation:YES];
     _mapView.delegate = self;
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self
@@ -110,6 +109,10 @@
     _mapView.layer.shadowRadius = 3;
     _mapView.layer.shadowOpacity = 0.6;
     _mapView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, _mapView.frame.size.width, _mapView.frame.size.height)].CGPath;
+    
+    MTDDirectionsSetLogLevel(MTDLogLevelInfo);
+    MTDDirectionsSetActiveAPI(MTDDirectionsAPIGoogle);
+    MTDDirectionsSetMeasurementSystem(MTDMeasurementSystemMetric);
 }
 
 - (void)setupMapControls {
@@ -215,24 +218,35 @@
 - (void)clearMapPoints {
     carFinderAnnotationView = nil;
     [_mapView removeAnnotations:_mapView.annotations];
+    [_mapView removeDirectionsOverlay];
+    [getDirButton setTitle:@"Directions" forState:UIControlStateNormal];
 }
 
 - (void)askForDirections {
-    if (carFinderAnnotationView != nil) {
-        UIAlertView *showDirAlert = [[UIAlertView alloc] initWithTitle:@"Directions"
-                                                               message:@"Would you like directions to your car's location?"
-                                                              delegate:self
-                                                     cancelButtonTitle:@"NO"
-                                                     otherButtonTitles:@"YES", nil];
-        showDirAlert.tag = Get_Dir_Alert_Tag;
-        [showDirAlert show];
+    if (showingDirections) {
+        [self clearMapPoints];
+        showingDirections = NO;
+        [_twoLineTitleView.titleLabel setText:@"Car Finder"];
+        [_twoLineTitleView.subTitleLabel setText:@"Not tracking car's location"];
+        [getDirButton setTitle:@"Directions" forState:UIControlStateNormal];
+        [self centerAtCurrentLocation];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Car Locaion"
-                                                        message:@"You have not placed your car's location on the map yet."
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
+        if (carFinderAnnotationView != nil) {
+            UIAlertView *showDirAlert = [[UIAlertView alloc] initWithTitle:@"Directions"
+                                                                   message:@"Would you like directions to your car's location?"
+                                                                  delegate:self
+                                                         cancelButtonTitle:@"Cancel"
+                                                         otherButtonTitles:@"Driving Directions", @"Walking Directions", nil];
+            showDirAlert.tag = Get_Dir_Alert_Tag;
+            [showDirAlert show];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Car Locaion"
+                                                            message:@"You have not placed your car's location on the map yet."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
     }
 }
 
@@ -296,21 +310,26 @@
             carFinderAnnotationView = nil;
         }
     } else if (alertView.tag == Get_Dir_Alert_Tag) {
-        if (buttonIndex == 1) {
-            MKPlacemark* placeMark = [[MKPlacemark alloc] initWithCoordinate:carFinderAnnotationView.coordinate addressDictionary:nil];
-            MKMapItem* destination = [[MKMapItem alloc] initWithPlacemark:placeMark];
-            destination.name = @"Your Car's Location";
-            [destination openInMapsWithLaunchOptions:@{MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeWalking}];
+        if (buttonIndex > 0) {
+            int dirType = MTDDirectionsRouteTypePedestrian;
+            if (buttonIndex == 1) {
+                dirType = MTDDirectionsRouteTypeFastestDriving;
+            }
+            [_mapView loadDirectionsFrom:_mapView.userLocation.coordinate
+                                      to:carFinderAnnotationView.coordinate
+                               routeType:dirType
+                    zoomToShowDirections:YES];
+            showingDirections = YES;
+            [getDirButton setTitle:@"Clear Directions" forState:UIControlStateNormal];
         }
     }
 }
 
-#pragma mark - MKMapViewDelegate methods
+#pragma mark - MTDMapViewDelegate methods
 
-- (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)aUserLocation {
-    if ([userLocationButton isSelected]) {
-        [self centerAtCurrentLocation];
-    }
+- (void)mapView:(MTDMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation distanceToActiveRoute:(CGFloat)distanceToActiveRoute {
+    [self centerAtCurrentLocation];
+    [_twoLineTitleView.subTitleLabel setText:[NSString stringWithFormat:@"%@ mi", [formatter stringFromNumber:[NSNumber numberWithDouble:distanceToActiveRoute]]]];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapview viewForAnnotation:(id <MKAnnotation>)annotation {
@@ -358,6 +377,40 @@
     
     [self askForDirections];
     [mapView deselectAnnotation:view.annotation animated:NO];
+}
+
+
+- (MTDDirectionsOverlay *)mapView:(MTDMapView *)mapView didFinishLoadingDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay {
+    [_twoLineTitleView.titleLabel setText:directionsOverlay.activeRoute.name];
+    [_twoLineTitleView.subTitleLabel setText:[NSString stringWithFormat:@"%@ mi - %@", [formatter stringFromNumber:[NSNumber numberWithDouble:directionsOverlay.activeRoute.distance.distanceInCurrentMeasurementSystem]], [self getTravelTimeFromDirections:directionsOverlay.activeRoute.timeInSeconds]]];
+    return directionsOverlay;
+}
+
+- (void)mapView:(MTDMapView *)mapView didActivateRoute:(MTDRoute *)route ofDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay {
+    [_twoLineTitleView.titleLabel setText:route.name];
+    [_twoLineTitleView.subTitleLabel setText:[NSString stringWithFormat:@"%@ mi - %@", [formatter stringFromNumber:[NSNumber numberWithDouble:route.distance.distanceInCurrentMeasurementSystem]], [self getTravelTimeFromDirections:directionsOverlay.timeInSeconds]]];
+}
+
+- (void)mapView:(MTDMapView *)mapView didFailLoadingDirectionsOverlayWithError:(NSError *)error {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Occurred"
+                                                    message:@"Unable to load directions at this time. Please try again later."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+#pragma mark - Utility methods 
+
+- (NSString*)getTravelTimeFromDirections:(double)totalSeconds {
+    int hours = totalSeconds / (60 * 60);
+    int minutes = (int)(totalSeconds / 60) % 60;
+    
+    if ( hours > 0 ) {
+        return [NSString stringWithFormat:@"%d hrs, %02d min", hours, minutes];
+    } else {
+        return [NSString stringWithFormat:@"%d min", minutes];
+    }
 }
 
 #pragma mark - Cleanup methods

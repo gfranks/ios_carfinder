@@ -27,6 +27,9 @@
 		687F7D03173DE83500082BBF /* NextPageNoTextureFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 687F7CFA173DE83500082BBF /* NextPageNoTextureFragmentShader.glsl */; };
 		687F7D04173DE83500082BBF /* NextPageNoTextureVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 687F7CFB173DE83500082BBF /* NextPageNoTextureVertexShader.glsl */; };
 		687F7D05173DE83500082BBF /* NextPageVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 687F7CFC173DE83500082BBF /* NextPageVertexShader.glsl */; };
+		687F7D0E1741305400082BBF /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 687F7D0D1741305400082BBF /* libxml2.dylib */; };
+		687F7D101741309B00082BBF /* MTDirectionsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 687F7D0F1741309B00082BBF /* MTDirectionsKit.framework */; };
+		687F7D1B174134A600082BBF /* TwoLineTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 687F7D1A174134A600082BBF /* TwoLineTitleView.m */; };
 		68C75B0F173C8366007E2F61 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B0E173C8366007E2F61 /* UIKit.framework */; };
 		68C75B11173C8366007E2F61 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B10173C8366007E2F61 /* Foundation.framework */; };
 		68C75B13173C8366007E2F61 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68C75B12173C8366007E2F61 /* CoreGraphics.framework */; };
@@ -61,6 +64,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		687F7D151741323000082BBF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 687F7D111741323000082BBF /* MTDirectionsKitDemo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9BB9AD141517602C003FC9F7;
+			remoteInfo = MTDirectionsKitDemo;
+		};
 		68C75B39173C8367007E2F61 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 68C75B03173C8366007E2F61 /* Project object */;
@@ -96,6 +106,11 @@
 		687F7CFA173DE83500082BBF /* NextPageNoTextureFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NextPageNoTextureFragmentShader.glsl; sourceTree = "<group>"; };
 		687F7CFB173DE83500082BBF /* NextPageNoTextureVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NextPageNoTextureVertexShader.glsl; sourceTree = "<group>"; };
 		687F7CFC173DE83500082BBF /* NextPageVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NextPageVertexShader.glsl; sourceTree = "<group>"; };
+		687F7D0D1741305400082BBF /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		687F7D0F1741309B00082BBF /* MTDirectionsKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MTDirectionsKit.framework; path = "../myell0w-MTDirectionsKitDemo-41e8ebb/MTDirectionsKit.framework"; sourceTree = "<group>"; };
+		687F7D111741323000082BBF /* MTDirectionsKitDemo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MTDirectionsKitDemo.xcodeproj; path = "../myell0w-MTDirectionsKitDemo-41e8ebb/MTDirectionsDemo/MTDirectionsKitDemo.xcodeproj"; sourceTree = "<group>"; };
+		687F7D19174134A600082BBF /* TwoLineTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoLineTitleView.h; sourceTree = "<group>"; };
+		687F7D1A174134A600082BBF /* TwoLineTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoLineTitleView.m; sourceTree = "<group>"; };
 		68C75B0B173C8366007E2F61 /* CarFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68C75B0E173C8366007E2F61 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		68C75B10173C8366007E2F61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -148,6 +163,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				687F7D101741309B00082BBF /* MTDirectionsKit.framework in Frameworks */,
+				687F7D0E1741305400082BBF /* libxml2.dylib in Frameworks */,
 				687F7CE0173DDF3100082BBF /* OpenGLES.framework in Frameworks */,
 				687F7CDF173DDF2400082BBF /* QuartzCore.framework in Frameworks */,
 				68C75B5D173C9D75007E2F61 /* CoreLocation.framework in Frameworks */,
@@ -209,9 +226,36 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		687F7D121741323000082BBF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				687F7D161741323000082BBF /* MTDirections.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		687F7D171741348200082BBF /* TwoLineTitleView */ = {
+			isa = PBXGroup;
+			children = (
+				687F7D19174134A600082BBF /* TwoLineTitleView.h */,
+				687F7D1A174134A600082BBF /* TwoLineTitleView.m */,
+			);
+			name = TwoLineTitleView;
+			sourceTree = "<group>";
+		};
+		687F7D181741348E00082BBF /* LocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				68C75B59173C9D32007E2F61 /* LocationManager.h */,
+				68C75B5A173C9D32007E2F61 /* LocationManager.m */,
+			);
+			name = LocationManager;
+			sourceTree = "<group>";
+		};
 		68C75B02173C8366007E2F61 = {
 			isa = PBXGroup;
 			children = (
+				687F7D111741323000082BBF /* MTDirectionsKitDemo.xcodeproj */,
 				68C75B14173C8366007E2F61 /* CarFinder */,
 				68C75B3B173C8367007E2F61 /* CarFinderTests */,
 				68C75B0D173C8366007E2F61 /* Frameworks */,
@@ -231,6 +275,8 @@
 		68C75B0D173C8366007E2F61 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				687F7D0F1741309B00082BBF /* MTDirectionsKit.framework */,
+				687F7D0D1741305400082BBF /* libxml2.dylib */,
 				68C75B9E173D557E007E2F61 /* libicucore.dylib */,
 				68C75B9C173D5556007E2F61 /* SystemConfiguration.framework */,
 				68C75B9A173D554E007E2F61 /* MobileCoreServices.framework */,
@@ -254,10 +300,10 @@
 				68C75B1E173C8366007E2F61 /* GFAppDelegate.m */,
 				68C75B2C173C8366007E2F61 /* GFViewController.h */,
 				68C75B2D173C8366007E2F61 /* GFViewController.m */,
-				68C75B59173C9D32007E2F61 /* LocationManager.h */,
-				68C75B5A173C9D32007E2F61 /* LocationManager.m */,
 				68C75B26173C8366007E2F61 /* MainStoryboard_iPhone.storyboard */,
 				68C75B4F173C8C8C007E2F61 /* MainStoryboard_iPad.storyboard */,
+				687F7D171741348200082BBF /* TwoLineTitleView */,
+				687F7D181741348E00082BBF /* LocationManager */,
 				687F7CC5173DDE0300082BBF /* XBPageCurl */,
 				68C75B15173C8366007E2F61 /* Supporting Files */,
 				68C75B4C173C8566007E2F61 /* CarFinderAnnotationView.h */,
@@ -370,6 +416,12 @@
 			mainGroup = 68C75B02173C8366007E2F61;
 			productRefGroup = 68C75B0C173C8366007E2F61 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 687F7D121741323000082BBF /* Products */;
+					ProjectRef = 687F7D111741323000082BBF /* MTDirectionsKitDemo.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				68C75B0A173C8366007E2F61 /* CarFinder */,
@@ -377,6 +429,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		687F7D161741323000082BBF /* MTDirections.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = MTDirections.app;
+			remoteRef = 687F7D151741323000082BBF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		68C75B09173C8366007E2F61 /* Resources */ = {
@@ -456,6 +518,7 @@
 				687F7CD8173DDE1B00082BBF /* XBPageCurlView.m in Sources */,
 				687F7CD9173DDE1B00082BBF /* XBPageDragView.m in Sources */,
 				687F7CDA173DDE1B00082BBF /* XBSnappingPoint.m in Sources */,
+				687F7D1B174134A600082BBF /* TwoLineTitleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,6 +629,11 @@
 		68C75B47173C8367007E2F61 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Downloads/myell0w-MTDirectionsKitDemo-41e8ebb\"",
+					"\"$(SRCROOT)/../myell0w-MTDirectionsKitDemo-41e8ebb\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CarFinder/CarFinder-Prefix.pch";
 				INFOPLIST_FILE = "CarFinder/CarFinder-Info.plist";
@@ -578,6 +646,11 @@
 		68C75B48173C8367007E2F61 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../Downloads/myell0w-MTDirectionsKitDemo-41e8ebb\"",
+					"\"$(SRCROOT)/../myell0w-MTDirectionsKitDemo-41e8ebb\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CarFinder/CarFinder-Prefix.pch";
 				INFOPLIST_FILE = "CarFinder/CarFinder-Info.plist";

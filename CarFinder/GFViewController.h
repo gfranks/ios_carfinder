@@ -10,10 +10,13 @@
 #import <MapKit/MapKit.h>
 #import "CarFinderAnnotationView.h"
 #import "XBPageDragView.h"
+#import <MTDirectionsKit/MTDirectionsKit.h>
+#import "TwoLineTitleView.h"
 
-@interface GFViewController : UIViewController <UIAlertViewDelegate, MKMapViewDelegate, XBPageDragViewDelegate>
+@interface GFViewController : UIViewController <UIAlertViewDelegate, MTDDirectionsDelegate, MKMapViewDelegate, XBPageDragViewDelegate>
 
-@property (nonatomic, strong) MKMapView *mapView;
+@property (nonatomic, strong) MTDMapView *mapView;
 @property (nonatomic, strong) UIButton *carDirectionsButton;
+@property (nonatomic, strong) TwoLineTitleView *twoLineTitleView;
 
 @end
