@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68349D3F174276C500996E53 /* AlertHUDView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68349D3D174276C500996E53 /* AlertHUDView.m */; };
+		68349D40174276C500996E53 /* AlertHUDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68349D3E174276C500996E53 /* AlertHUDView.xib */; };
 		687F7CD4173DDE1B00082BBF /* CGPointAdditions.c in Sources */ = {isa = PBXBuildFile; fileRef = 687F7CC6173DDE1A00082BBF /* CGPointAdditions.c */; };
 		687F7CD5173DDE1B00082BBF /* XBAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 687F7CC9173DDE1A00082BBF /* XBAnimation.m */; };
 		687F7CD6173DDE1B00082BBF /* XBAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 687F7CCB173DDE1B00082BBF /* XBAnimationManager.m */; };
@@ -81,6 +83,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		68349D3C174276C500996E53 /* AlertHUDView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertHUDView.h; sourceTree = "<group>"; };
+		68349D3D174276C500996E53 /* AlertHUDView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertHUDView.m; sourceTree = "<group>"; };
+		68349D3E174276C500996E53 /* AlertHUDView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertHUDView.xib; sourceTree = "<group>"; };
 		687F7CC6173DDE1A00082BBF /* CGPointAdditions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CGPointAdditions.c; sourceTree = "<group>"; };
 		687F7CC7173DDE1A00082BBF /* CGPointAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPointAdditions.h; sourceTree = "<group>"; };
 		687F7CC8173DDE1A00082BBF /* XBAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBAnimation.h; sourceTree = "<group>"; };
@@ -188,6 +193,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68349D3A174276B100996E53 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				68C75B4C173C8566007E2F61 /* CarFinderAnnotationView.h */,
+				68C75B4D173C8566007E2F61 /* CarFinderAnnotationView.m */,
+				68349D3C174276C500996E53 /* AlertHUDView.h */,
+				68349D3D174276C500996E53 /* AlertHUDView.m */,
+				68349D3E174276C500996E53 /* AlertHUDView.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		687F7CC5173DDE0300082BBF /* XBPageCurl */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,16 +331,15 @@
 		68C75B14173C8366007E2F61 /* CarFinder */ = {
 			isa = PBXGroup;
 			children = (
-				687F7D2417413FE600082BBF /* ViewControllers */,
-				687F7D251741400200082BBF /* Storyboards */,
-				687F7D171741348200082BBF /* TwoLineTitleView */,
 				687F7D181741348E00082BBF /* LocationManager */,
-				687F7CC5173DDE0300082BBF /* XBPageCurl */,
+				687F7D251741400200082BBF /* Storyboards */,
 				68C75B15173C8366007E2F61 /* Supporting Files */,
+				687F7D171741348200082BBF /* TwoLineTitleView */,
+				687F7D2417413FE600082BBF /* ViewControllers */,
+				68349D3A174276B100996E53 /* Views */,
+				687F7CC5173DDE0300082BBF /* XBPageCurl */,
 				68C75B1D173C8366007E2F61 /* GFAppDelegate.h */,
 				68C75B1E173C8366007E2F61 /* GFAppDelegate.m */,
-				68C75B4C173C8566007E2F61 /* CarFinderAnnotationView.h */,
-				68C75B4D173C8566007E2F61 /* CarFinderAnnotationView.m */,
 			);
 			path = CarFinder;
 			sourceTree = "<group>";
@@ -488,6 +504,7 @@
 				687F7D03173DE83500082BBF /* NextPageNoTextureFragmentShader.glsl in Resources */,
 				687F7D04173DE83500082BBF /* NextPageNoTextureVertexShader.glsl in Resources */,
 				687F7D05173DE83500082BBF /* NextPageVertexShader.glsl in Resources */,
+				68349D40174276C500996E53 /* AlertHUDView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +552,7 @@
 				687F7CD9173DDE1B00082BBF /* XBPageDragView.m in Sources */,
 				687F7CDA173DDE1B00082BBF /* XBSnappingPoint.m in Sources */,
 				687F7D1B174134A600082BBF /* TwoLineTitleView.m in Sources */,
+				68349D3F174276C500996E53 /* AlertHUDView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

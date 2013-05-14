@@ -9,6 +9,7 @@
 #import "GFViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "LocationManager.h"
+#import "AlertHUDView.h"
 
 #define Add_Pin_Alert_Tag 101
 #define Get_Dir_Alert_Tag 102
@@ -27,6 +28,7 @@
     BOOL showingDirections;
     
     NSNumberFormatter *formatter;
+    AlertHUDView *hudView;
 }
 
 @end
@@ -347,6 +349,7 @@
                     zoomToShowDirections:YES];
             showingDirections = YES;
             [getDirButton setTitle:@"End Navigation" forState:UIControlStateNormal];
+            hudView = [AlertHUDView showHUDWithMessage:@"Loading..." inViewController:self];
             
         }
     } else if (alertView.tag == End_Nav_Alert_Tag) {
@@ -417,6 +420,7 @@
 
 
 - (MTDDirectionsOverlay *)mapView:(MTDMapView *)mapView didFinishLoadingDirectionsOverlay:(MTDDirectionsOverlay *)directionsOverlay {
+    [hudView dismiss];
     [_twoLineTitleView.titleLabel setText:directionsOverlay.activeRoute.name];
     [_twoLineTitleView.subTitleLabel setText:[NSString stringWithFormat:@"%@ mi - %@", [formatter stringFromNumber:[NSNumber numberWithDouble:directionsOverlay.activeRoute.distance.distanceInCurrentMeasurementSystem]], [self getTravelTimeFromDirections:directionsOverlay.activeRoute.timeInSeconds]]];
     return directionsOverlay;
@@ -428,6 +432,7 @@
 }
 
 - (void)mapView:(MTDMapView *)mapView didFailLoadingDirectionsOverlayWithError:(NSError *)error {
+    [hudView dismiss];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Occurred"
                                                     message:@"Unable to load directions at this time. Please try again later."
                                                    delegate:nil
