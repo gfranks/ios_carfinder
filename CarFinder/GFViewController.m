@@ -12,6 +12,7 @@
 
 #define Add_Pin_Alert_Tag 101
 #define Get_Dir_Alert_Tag 102
+#define End_Nav_Alert_Tag 103
 
 @interface GFViewController() {
     CarFinderAnnotationView *carFinderAnnotationView;
@@ -19,8 +20,9 @@
     UIButton *clearMapButton, *getDirButton, *userLocationButton;
     XBPageDragView *pageDragView;
     
-    UISegmentedControl *mapTypeControl;
+    UISegmentedControl *mapTypeControl, *directionsTypeControl;
     UILabel *mapTypeLabel;
+    int directionsType;
     
     BOOL showingDirections;
     
@@ -41,6 +43,7 @@
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     [formatter setMaximumFractionDigits:2];
     [formatter setRoundingMode: NSNumberFormatterRoundUp];
+    directionsType = [[NSUserDefaults standardUserDefaults] integerForKey:@"directionsType"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -100,7 +103,7 @@
     _mapView.delegate = self;
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self
                                                                                        action:@selector(addPointToMap:)];
-    lpgr.minimumPressDuration = 2.0;
+    lpgr.minimumPressDuration = 1.0;
     [_mapView addGestureRecognizer:lpgr];
     [self.view insertSubview:_mapView belowSubview:splashView];
     
@@ -117,27 +120,33 @@
 
 - (void)setupMapControls {
     CGRect screenRect = [UIScreen mainScreen].bounds;
-    mapTypeControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Standard", @"Hybrid", @"Satellite", nil]];
-    mapTypeControl.frame = CGRectMake(screenRect.size.width-290, screenRect.size.height - 175, 280, 44);
     
+    mapTypeControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Standard", @"Hybrid", @"Satellite", nil]];
+    mapTypeControl.frame = CGRectMake(screenRect.size.width-265, screenRect.size.height - 165, 260, 44);
     [mapTypeControl addTarget:self action:@selector(mapTypeSwitch:) forControlEvents:UIControlEventValueChanged];
     [mapTypeControl setSelectedSegmentIndex:[[NSUserDefaults standardUserDefaults] integerForKey:@"mapType"]];
     [self mapTypeSwitch:mapTypeControl];
-    
     [self.view insertSubview:mapTypeControl belowSubview:_mapView];
-    mapTypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(130, mapTypeControl.frame.origin.y - 30, mapTypeControl.frame.size.width, 21)];
+    
+    directionsTypeControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Driving", @"Walking", @"Bicycling", nil]];
+    directionsTypeControl.frame = CGRectMake(screenRect.size.width-265, screenRect.size.height - 210, 260, 44);
+    [directionsTypeControl addTarget:self action:@selector(directionsTypeSwitch:) forControlEvents:UIControlEventValueChanged];
+    [directionsTypeControl setSelectedSegmentIndex:directionsType/2];
+    [self.view insertSubview:directionsTypeControl belowSubview:_mapView];
+    
+    mapTypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(135, directionsTypeControl.frame.origin.y - 25, mapTypeControl.frame.size.width, 21)];
     [mapTypeLabel setBackgroundColor:[UIColor clearColor]];
-    [mapTypeLabel setText:@"Change Map Type"];
+    [mapTypeLabel setText:@"Map/Directions Type"];
     [mapTypeLabel setTextColor:[UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f]];
     [mapTypeLabel setShadowColor:[UIColor whiteColor]];
     [mapTypeLabel setShadowOffset:CGSizeMake(0, 1)];
-    [mapTypeLabel setFont:[UIFont boldSystemFontOfSize:20.0]];
+    [mapTypeLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
     [self.view insertSubview:mapTypeLabel belowSubview:_mapView];
 }
 
 - (void)setupActionButtons {
     CGRect screenRect = [UIScreen mainScreen].bounds;
-    clearMapButton = [[UIButton alloc] initWithFrame:CGRectMake(5, _mapView.frame.size.height + 5, (screenRect.size.width/2)-8, 45)];
+    clearMapButton = [[UIButton alloc] initWithFrame:CGRectMake(0, _mapView.frame.size.height + 5, 0, 45)];
     [clearMapButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [clearMapButton setTitleColor:[UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f] forState:UIControlStateNormal];
     [clearMapButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -151,7 +160,7 @@
     [clearMapButton setTitle:@"Clear Markers" forState:UIControlStateNormal];
     [self.view insertSubview:clearMapButton belowSubview:splashView];
     
-    getDirButton = [[UIButton alloc] initWithFrame:CGRectMake(clearMapButton.frame.size.width+10, _mapView.frame.size.height + 5, (screenRect.size.width/2)-7, 45)];
+    getDirButton = [[UIButton alloc] initWithFrame:CGRectMake(5, _mapView.frame.size.height + 5, screenRect.size.width-10, 45)];
     [getDirButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     [getDirButton setTitleColor:[UIColor colorWithRed:(115/255.f) green:(115/255.f) blue:(115/255.f) alpha:1.0f] forState:UIControlStateNormal];
     [getDirButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -216,28 +225,36 @@
 }
 
 - (void)clearMapPoints {
+    [_twoLineTitleView.titleLabel setText:@"Car Finder"];
+    [_twoLineTitleView.subTitleLabel setText:@"Not tracking car's location"];
     showingDirections = NO;
     carFinderAnnotationView = nil;
     [_mapView removeAnnotations:_mapView.annotations];
     [_mapView removeDirectionsOverlay];
     [getDirButton setTitle:@"Directions" forState:UIControlStateNormal];
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect screenRect = [UIScreen mainScreen].bounds;
+        clearMapButton.frame = CGRectMake(0, _mapView.frame.size.height + 5, 0, 45);
+        getDirButton.frame = CGRectMake(5, _mapView.frame.size.height + 5, screenRect.size.width - 10, 45);
+    }];
 }
 
 - (void)askForDirections {
     if (showingDirections) {
-        [self clearMapPoints];
-        showingDirections = NO;
-        [_twoLineTitleView.titleLabel setText:@"Car Finder"];
-        [_twoLineTitleView.subTitleLabel setText:@"Not tracking car's location"];
-        [getDirButton setTitle:@"Directions" forState:UIControlStateNormal];
-        [self centerAtCurrentLocation];
+        UIAlertView *endNavAlert = [[UIAlertView alloc] initWithTitle:@"End Navigation"
+                                                              message:@"Do you wish to end navigation?"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"NO"
+                                                    otherButtonTitles:@"YES", nil];
+        endNavAlert.tag = End_Nav_Alert_Tag;
+        [endNavAlert show];
     } else {
         if (carFinderAnnotationView != nil) {
             UIAlertView *showDirAlert = [[UIAlertView alloc] initWithTitle:@"Directions"
                                                                    message:@"Would you like directions to your car's location?"
                                                                   delegate:self
-                                                         cancelButtonTitle:@"Cancel"
-                                                         otherButtonTitles:@"Driving Directions", @"Walking Directions", nil];
+                                                         cancelButtonTitle:@"NO"
+                                                         otherButtonTitles:@"YES", nil];
             showDirAlert.tag = Get_Dir_Alert_Tag;
             [showDirAlert show];
         } else {
@@ -290,6 +307,12 @@
     [pageDragView uncurlPageAnimated:YES completion:nil];
 }
 
+- (void)directionsTypeSwitch:(id)sender {
+    directionsType = directionsTypeControl.selectedSegmentIndex*2;
+    [[NSUserDefaults standardUserDefaults] setInteger:directionsType forKey:@"directionsType"];
+    [pageDragView uncurlPageAnimated:YES completion:nil];
+}
+
 #pragma mark - XBPageDragViewDelegate methods
 
 - (void)pageDidCurl:(BOOL)pageCurled {
@@ -307,21 +330,33 @@
         if (buttonIndex == 1) {
             [_mapView removeAnnotations:_mapView.annotations];
             [_mapView addAnnotation:carFinderAnnotationView];
+            [_twoLineTitleView.subTitleLabel setText:@"Car Location Tracked"];
+            [UIView animateWithDuration:0.3 animations:^{
+                CGRect screenRect = [UIScreen mainScreen].bounds;
+                clearMapButton.frame = CGRectMake(5, _mapView.frame.size.height + 5, (screenRect.size.width/2)-8, 45);
+                getDirButton.frame = CGRectMake(clearMapButton.frame.origin.x + clearMapButton.frame.size.width + 5, _mapView.frame.size.height + 5, (screenRect.size.width/2)-7, 45);
+            }];
         } else {
             carFinderAnnotationView = nil;
         }
     } else if (alertView.tag == Get_Dir_Alert_Tag) {
-        if (buttonIndex > 0) {
-            int dirType = MTDDirectionsRouteTypePedestrian;
-            if (buttonIndex == 1) {
-                dirType = MTDDirectionsRouteTypeFastestDriving;
-            }
+        if (buttonIndex == 1) {
             [_mapView loadDirectionsFrom:_mapView.userLocation.coordinate
                                       to:carFinderAnnotationView.coordinate
-                               routeType:dirType
+                               routeType:directionsType
                     zoomToShowDirections:YES];
             showingDirections = YES;
-            [getDirButton setTitle:@"Clear Directions" forState:UIControlStateNormal];
+            [getDirButton setTitle:@"End Navigation" forState:UIControlStateNormal];
+            
+        }
+    } else if (alertView.tag == End_Nav_Alert_Tag) {
+        if (buttonIndex == 1) {
+            [_mapView removeDirectionsOverlay];
+            showingDirections = NO;
+            [_twoLineTitleView.titleLabel setText:@"Car Finder"];
+            [_twoLineTitleView.subTitleLabel setText:@"Car Location Tracked"];
+            [getDirButton setTitle:@"Directions" forState:UIControlStateNormal];
+            [self centerAtCurrentLocation];
         }
     }
 }
